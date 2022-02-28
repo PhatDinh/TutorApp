@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/screens/Forget/forget_screen.dart';
 import 'package:tutor_app/screens/Register/register_screen.dart';
 import 'package:tutor_app/widgets/already_have_an_account_check.dart';
 import 'package:tutor_app/widgets/other_option_login.dart';
@@ -43,7 +44,10 @@ class Body extends StatelessWidget {
           Align(
             alignment: Alignment(0.5, 0),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ForgetScreen()));
+                },
                 child: Text(
                   "Forgot password ?",
                 )),
