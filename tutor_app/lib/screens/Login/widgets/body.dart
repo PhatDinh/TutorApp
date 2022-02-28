@@ -46,17 +46,15 @@ class Body extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(25)),
-            child: TextFormField(
-              validator: (String value) {
-                if (value.trim().isEmpty) return "Password is required";
-              },
+            child: TextField(
               obscureText: true,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Your password",
                   icon: Icon(Icons.lock)),
             ),
-          )
+          ),
+          TextButton(onPressed: () {}, child: Text("Forget your password ?")),
         ],
       ),
     );
