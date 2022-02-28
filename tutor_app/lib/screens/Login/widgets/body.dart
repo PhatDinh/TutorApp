@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'background.dart';
+import './background.dart';
+import './text_field_container.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -25,19 +26,9 @@ class Body extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-          Container(
-            width: size.width * 0.7,
-            margin: EdgeInsets.symmetric(vertical: 10),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(25)),
-            child: TextField(
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Your email",
-                  icon: Icon(Icons.person)),
-            ),
+          RoundedInputField(
+            hintText: "Your Email",
+            onChanged: (value) {},
           ),
           Container(
             width: size.width * 0.7,
@@ -54,8 +45,37 @@ class Body extends StatelessWidget {
                   icon: Icon(Icons.lock)),
             ),
           ),
-          TextButton(onPressed: () {}, child: Text("Forget your password ?")),
+          TextButton(
+              onPressed: () {},
+              child: Text(
+                "Forget your password ?",
+              )),
+          TextFieldContainer(child: Text('LOGIN')),
         ],
+      ),
+    );
+  }
+}
+
+class RoundedInputField extends StatelessWidget {
+  final String hintText;
+  final IconData hintIcon;
+  final ValueChanged<String> onChanged;
+  const RoundedInputField({
+    Key key,
+    this.hintText,
+    this.hintIcon = Icons.person,
+    this.onChanged,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFieldContainer(
+      child: TextField(
+        decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: "Your email",
+            icon: Icon(hintIcon)),
       ),
     );
   }
