@@ -17,9 +17,7 @@ class RoundedInputField extends StatelessWidget {
     return TextFieldContainer(
       child: TextField(
         decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: "Your email",
-            icon: Icon(hintIcon)),
+            border: InputBorder.none, hintText: hintText, icon: Icon(hintIcon)),
       ),
     );
   }

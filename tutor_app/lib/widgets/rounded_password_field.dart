@@ -3,10 +3,12 @@ import '../widgets/text_field_container.dart';
 
 class RoundedPasswordField extends StatelessWidget {
   final ValueChanged<String> onChanged;
+  final String hintText;
 
   const RoundedPasswordField({
     Key key,
     this.onChanged,
+    this.hintText = "Your password",
   }) : super(key: key);
 
   @override
@@ -16,7 +18,7 @@ class RoundedPasswordField extends StatelessWidget {
       obscureText: true,
       decoration: InputDecoration(
         border: InputBorder.none,
-        hintText: "Your password",
+        hintText: hintText,
         icon: Icon(Icons.lock),
       ),
     ));
