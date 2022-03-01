@@ -4,9 +4,13 @@ class RoundedButton extends StatelessWidget {
   final String text;
   final Function press;
   final Color color, textColor;
+  final double sizeButton;
+  final double sizeFont;
   const RoundedButton({
     Key key,
+    this.sizeButton = 0.7,
     this.text,
+    this.sizeFont = 14,
     this.press,
     this.color = Colors.blue,
     this.textColor = Colors.white,
@@ -17,16 +21,13 @@ class RoundedButton extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
-      width: size.width * 0.7,
+      width: size.width * sizeButton,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(29),
         child: newElevatedButton(),
       ),
     );
   }
-
-  //Used:ElevatedButton as FlatButton is deprecated.
-  //Here we have to apply customizations to Button by inheriting the styleFrom
 
   Widget newElevatedButton() {
     return ElevatedButton(
@@ -37,9 +38,11 @@ class RoundedButton extends StatelessWidget {
       onPressed: press,
       style: ElevatedButton.styleFrom(
           primary: color,
-          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
           textStyle: TextStyle(
-              color: textColor, fontSize: 14, fontWeight: FontWeight.w500)),
+              color: textColor,
+              fontSize: sizeFont,
+              fontWeight: FontWeight.w500)),
     );
   }
 }
