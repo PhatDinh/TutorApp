@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
+  final double borderRadius;
 
   const TextFieldContainer({
     Key key,
+    this.borderRadius = 25,
     @required this.child,
   }) : super(key: key);
   @override
@@ -16,7 +18,7 @@ class TextFieldContainer extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(25)),
+          borderRadius: BorderRadius.circular(borderRadius)),
       child: child,
     );
   }

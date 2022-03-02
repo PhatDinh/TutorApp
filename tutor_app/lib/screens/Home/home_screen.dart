@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/screens/Messenger/message_screen.dart';
+import 'package:tutor_app/screens/Profile/profile_screen.dart';
+import 'package:tutor_app/screens/Settings/settings_screen.dart';
+import 'package:tutor_app/screens/Tutor/tutors_screen.dart';
+import './widgets/body.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,50 +14,87 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+  void onTapHandler(int value) {
+    setState(() {
+      _selectedIndex = value;
+    });
+  }
+
+  Widget getBody() {
+    if (_selectedIndex == 0) {
+      return Body();
+    } else if (_selectedIndex == 1)
+      return MessageRoom();
+    else if (_selectedIndex == 3)
+      return TutorsScreen();
+    else
+      return SettingScreen();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        titleTextStyle:
+            TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        backgroundColor: Colors.white,
         title: Text('Home'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => ProfileScreen()));
+            },
+            icon: const Icon(Icons.person),
+          )
+        ],
       ),
-      body: Container(
-        width: double.infinity,
-        height: size.height * 0.3,
-        color: Colors.lightBlue,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Welcome to LetTutor!',
-              style: TextStyle(color: Colors.white),
+      body: getBody(),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: Colors.grey,
             ),
-            RoundedButton(
-              sizeButton: 0.35,
-              color: Colors.white,
-              textColor: Colors.blue,
-              sizeFont: 10,
-              press: () {},
-              text: "Book a lesson",
-            )
-          ],
-        ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.message,
+              color: Colors.grey,
+            ),
+            label: 'Message',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.lock_clock,
+              color: Colors.grey,
+            ),
+            label: 'Upcoming',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.group,
+              color: Colors.grey,
+            ),
+            label: 'Tutor',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.wheelchair_pickup,
+              color: Colors.grey,
+            ),
+            label: 'Settings',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: (value) {
+          this.onTapHandler(value);
+        },
       ),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.call),
-          label: 'Calls',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.camera),
-          label: 'Camera',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.chat),
-          label: 'Chats',
-        ),
-      ]),
     );
   }
 }
