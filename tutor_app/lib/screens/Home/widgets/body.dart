@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/screens/Home/widgets/home_banner.dart';
+import 'package:tutor_app/screens/Tutor/tutors_detail_screen.dart';
 import 'package:tutor_app/screens/Tutor/tutors_screen.dart';
 import 'package:tutor_app/widgets/tutor_container.dart';
 
@@ -31,7 +32,12 @@ class Body extends StatelessWidget {
           ],
         ),
       ),
-      TutorContainer(),
+      GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (builder) => TutorsDetailScreen()));
+          },
+          child: TutorContainer()),
     ]);
   }
 }

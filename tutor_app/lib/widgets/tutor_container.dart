@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'rounded_tab_text.dart';
 
 class TutorContainer extends StatelessWidget {
   const TutorContainer({Key key}) : super(key: key);
@@ -36,25 +37,11 @@ class TutorContainer extends StatelessWidget {
                   ),
                   Row(
                     children: const [
-                      Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: OutlinedButton(
-                          onPressed: null,
-                          child: Text(
-                            'English',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ),
+                      RoundedTabText(
+                        nameTab: 'English',
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: OutlinedButton(
-                          onPressed: null,
-                          child: Text(
-                            'Math',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ),
+                      RoundedTabText(
+                        nameTab: 'Math',
                       ),
                     ],
                   ),
