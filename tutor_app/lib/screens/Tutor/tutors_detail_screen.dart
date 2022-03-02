@@ -19,6 +19,7 @@ class TutorsDetailScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             VideoContainer(),
             TutorDetailContainer(),
@@ -56,6 +57,49 @@ class TutorsDetailScreen extends StatelessWidget {
                 child: Text('Hello World'),
               ),
             ),
+            //Experience
+            Align(
+              alignment: Alignment(-1, 0),
+              child: SectionBox(
+                sectionName: "Education",
+                child: Text('3 years'),
+              ),
+            ),
+            //Interest
+            Align(
+              alignment: Alignment(-1, 0),
+              child: SectionBox(
+                sectionName: "Interest",
+                child: Text('Hello World'),
+              ),
+            ),
+            //Profession
+            Align(
+              alignment: Alignment(-1, 0),
+              child: SectionBox(
+                sectionName: "Profession",
+                child: Text('English teacher'),
+              ),
+            ),
+            //Specialities
+            SectionBox(
+                sectionName: "Specialities",
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      RoundedTabText(
+                        nameTab: 'English for kids',
+                      ),
+                      RoundedTabText(
+                        nameTab: 'TOEIC',
+                      ),
+                      RoundedTabText(
+                        nameTab: 'IELTS',
+                      ),
+                    ],
+                  ),
+                )),
 
             //Rating
             CarouselTextBox(),

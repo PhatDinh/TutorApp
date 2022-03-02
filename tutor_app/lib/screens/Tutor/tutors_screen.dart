@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 import 'package:tutor_app/widgets/rounded_input_field.dart';
 import 'package:tutor_app/widgets/rounded_search_field.dart';
+import 'package:tutor_app/widgets/rounded_tab_text.dart';
 import 'package:tutor_app/widgets/tutor_container.dart';
 
 class TutorsScreen extends StatelessWidget {
@@ -18,6 +19,31 @@ class TutorsScreen extends StatelessWidget {
               onChanged: (value) {},
               hintIcon: Icons.search,
               hintText: "Search Tutors",
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    RoundedTabText(
+                      nameTab: 'All',
+                    ),
+                    RoundedTabText(
+                      nameTab: 'English for kids',
+                    ),
+                    RoundedTabText(
+                      nameTab: 'IELTS',
+                    ),
+                    RoundedTabText(
+                      nameTab: 'TOEIC',
+                    ),
+                    RoundedTabText(
+                      nameTab: 'TOFEL',
+                    ),
+                  ],
+                ),
+              ),
             ),
             TutorContainer(),
           ],
