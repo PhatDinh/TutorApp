@@ -3,6 +3,7 @@ import 'package:tutor_app/screens/Messenger/message_screen.dart';
 import 'package:tutor_app/screens/Profile/profile_screen.dart';
 import 'package:tutor_app/screens/Settings/settings_screen.dart';
 import 'package:tutor_app/screens/Tutor/tutors_screen.dart';
+import 'package:tutor_app/screens/Upcoming/upcoming_screen.dart';
 import './widgets/body.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 
@@ -28,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
       return MessageRoom();
     else if (_selectedIndex == 3)
       return TutorsScreen();
+    else if (_selectedIndex == 2)
+      return UpcomingScreen();
     else
       return SettingScreen();
   }
