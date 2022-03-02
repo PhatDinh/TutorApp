@@ -14,13 +14,10 @@ class TutorsScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              child: RoundedSearchField(
-                onChanged: (value) {},
-                hintIcon: Icons.search,
-                hintText: "Search",
-              ),
+            RoundedSearchField(
+              onChanged: (value) {},
+              hintIcon: Icons.search,
+              hintText: "Search Tutors",
             ),
             TutorContainer(),
           ],

@@ -14,11 +14,23 @@ class RoundedSearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFieldContainer(
-      borderRadius: 15,
-      child: TextField(
-        decoration: InputDecoration(
-            border: InputBorder.none, hintText: hintText, icon: Icon(hintIcon)),
+    final Size size = MediaQuery.of(context).size;
+    return Container(
+      width: double.infinity,
+      height: size.height * 0.1,
+      child: Container(
+        width: size.width * 0.7,
+        margin: EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10)),
+        child: TextField(
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: hintText,
+              icon: Icon(hintIcon)),
+        ),
       ),
     );
   }
