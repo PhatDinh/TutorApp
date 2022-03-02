@@ -21,11 +21,12 @@ class RoundedSearchField extends StatelessWidget {
       child: Container(
         width: size.width * 0.7,
         margin: EdgeInsets.symmetric(vertical: 10),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(10)),
         child: TextField(
+          textAlign: TextAlign.left,
           decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hintText,
