@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/screens/Courses/courses_screen.dart';
 import 'package:tutor_app/screens/Messenger/message_screen.dart';
 import 'package:tutor_app/screens/Profile/profile_screen.dart';
 import 'package:tutor_app/screens/Settings/settings_screen.dart';
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_selectedIndex == 0) {
       return Body();
     } else if (_selectedIndex == 1)
-      return MessageRoom();
+      return CoursesScreen();
     else if (_selectedIndex == 3)
       return TutorsScreen();
     else if (_selectedIndex == 2)
@@ -69,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Icons.message,
               color: Colors.grey,
             ),
-            label: 'Message',
+            label: 'Courses',
           ),
           BottomNavigationBarItem(
             icon: Icon(

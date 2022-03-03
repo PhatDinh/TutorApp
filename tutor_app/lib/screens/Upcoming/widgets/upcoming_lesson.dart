@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UpcomingLeasson extends StatelessWidget {
-  const UpcomingLeasson({Key key}) : super(key: key);
+  final String date;
+  final String tutorName;
+  final String time;
+  final Function press;
+
+  const UpcomingLeasson(
+      {Key key, this.tutorName, this.date, this.time, this.press})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +30,17 @@ class UpcomingLeasson extends StatelessWidget {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Tutor name',
-                              style: TextStyle(
+                          Text(tutorName,
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               )),
-                          Text("Date"),
-                          Text("16:00")
+                          Text(date),
+                          Text(time)
                         ]),
                     const Spacer(),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: press,
                         child: const Icon(FontAwesomeIcons.doorOpen)),
                   ]),
                 ]))));

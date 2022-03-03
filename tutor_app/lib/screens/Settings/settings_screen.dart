@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/screens/Login/login_screen.dart';
 import 'package:tutor_app/screens/Settings/widgets/rounded_setting_button.dart';
+import 'package:tutor_app/screens/Upcoming/history_screen.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -35,7 +36,10 @@ class SettingScreen extends StatelessWidget {
           RoundedSettingButton(
             icon: Icons.person,
             text: "Seassion History",
-            press: () {},
+            press: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => HistoryScreen()));
+            },
           ),
           RoundedSettingButton(
             icon: Icons.person,

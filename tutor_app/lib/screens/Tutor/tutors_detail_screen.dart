@@ -23,13 +23,15 @@ class TutorsDetailScreen extends StatelessWidget {
           children: [
             VideoContainer(),
             TutorDetailContainer(),
-            RoundedButton(
-              sizeButton: 0.9,
-              color: Colors.blue,
-              textColor: Colors.white,
-              sizeFont: 20,
-              press: () {},
-              text: "Booking",
+            Center(
+              child: RoundedButton(
+                sizeButton: 0.9,
+                color: Colors.blue,
+                textColor: Colors.white,
+                sizeFont: 20,
+                press: () {},
+                text: "Booking",
+              ),
             ),
             //
             IntroduceTextBox(),
@@ -102,7 +104,11 @@ class TutorsDetailScreen extends StatelessWidget {
                 )),
 
             //Rating
-            CarouselTextBox(),
+            SectionBox(
+              sectionName: 'Review',
+              child:
+                  Container(width: double.infinity, child: CarouselTextBox()),
+            ),
           ],
         ),
       ),

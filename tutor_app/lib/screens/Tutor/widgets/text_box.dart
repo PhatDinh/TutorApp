@@ -15,25 +15,26 @@ class TextBox extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.only(bottom: 16),
         child: Card(
-          color: Colors.blue,
+          elevation: 5,
+          color: Colors.grey[100],
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(16)),
           ),
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
                   boxName,
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
                   boxDetail,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ],
             ),

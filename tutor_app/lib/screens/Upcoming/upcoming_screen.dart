@@ -10,10 +10,18 @@ class UpcomingScreen extends StatelessWidget {
         padding: EdgeInsets.only(top: 5),
         child: SingleChildScrollView(
           child: Column(children: [
-            UpcomingLeasson(),
-            UpcomingLeasson(),
-            UpcomingLeasson(),
-            UpcomingLeasson(),
+            UpcomingLeasson(
+              date: '3/4/2022',
+              time: "13:00 - 14:00",
+              tutorName: "Dinh Phat",
+              press: () {},
+            ),
+            UpcomingLeasson(
+              date: '3/4/2022',
+              time: "13:00 - 14:00",
+              tutorName: "Dinh Phat",
+              press: () {},
+            ),
           ]),
         ));
   }
