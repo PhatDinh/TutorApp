@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/screens/Courses/widgets/overview_container.dart';
 import 'package:tutor_app/screens/Tutor/widgets/section_box.dart';
+import 'package:tutor_app/widgets/rounded_button.dart';
 
 class CourseDetailScreen extends StatelessWidget {
   const CourseDetailScreen({Key key}) : super(key: key);
@@ -23,7 +24,12 @@ class CourseDetailScreen extends StatelessWidget {
                   height: size.height * 0.3,
                   width: size.width,
                 ),
-
+                Center(
+                  child: RoundedButton(
+                    text: 'Discover',
+                    press: () {},
+                  ),
+                ),
                 //Overview
                 OverviewContainer(
                   reason:
