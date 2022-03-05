@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-class DateEditButton extends StatelessWidget {
-  final String boxName;
+class DateEditButton extends StatefulWidget {
+  String boxName;
 
-  const DateEditButton({Key key, this.boxName}) : super(key: key);
+  DateEditButton({Key key, this.boxName}) : super(key: key);
 
+  @override
+  State<DateEditButton> createState() => _DateEditButtonState();
+}
+
+class _DateEditButtonState extends State<DateEditButton> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -14,7 +19,7 @@ class DateEditButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Align(alignment: Alignment(-1, 0), child: Text(boxName)),
+            Align(alignment: Alignment(-1, 0), child: Text("Birthday")),
             Container(
                 width: size.width * 0.9,
                 margin: EdgeInsets.symmetric(vertical: 5),
@@ -22,12 +27,37 @@ class DateEditButton extends StatelessWidget {
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(10)),
-                child: ElevatedButton(
-                  child: Text(
-                    boxName,
-                  ),
-                  onPressed: () {},
-                ))
+                child: Stack(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: widget.boxName,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: ElevatedButton(
+                          child: Text("Select"),
+                          onPressed: () {
+                            showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1990, 1),
+                              lastDate: DateTime(2022, 4),
+                            ).then((pickedDate) {
+                              setState(() {
+                                widget.boxName = pickedDate.toString();
+                              });
+                            });
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                )),
           ],
         ));
   }
