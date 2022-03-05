@@ -6,9 +6,15 @@ class UpcomingLeasson extends StatelessWidget {
   final String tutorName;
   final String time;
   final Function press;
+  final bool isHistory;
 
   const UpcomingLeasson(
-      {Key key, this.tutorName, this.date, this.time, this.press})
+      {Key key,
+      this.tutorName,
+      this.date,
+      this.time,
+      this.press,
+      this.isHistory = false})
       : super(key: key);
 
   @override
@@ -39,9 +45,10 @@ class UpcomingLeasson extends StatelessWidget {
                           Text(time)
                         ]),
                     const Spacer(),
-                    TextButton(
-                        onPressed: press,
-                        child: const Icon(FontAwesomeIcons.doorOpen)),
+                    if (isHistory == false)
+                      TextButton(
+                          onPressed: press,
+                          child: const Icon(FontAwesomeIcons.doorOpen)),
                   ]),
                 ]))));
   }

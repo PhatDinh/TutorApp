@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/screens/Courses/courses_screen.dart';
+import 'package:tutor_app/screens/Home/widgets/title_bar.dart';
 import 'package:tutor_app/screens/Messenger/message_screen.dart';
 import 'package:tutor_app/screens/Profile/profile_screen.dart';
 import 'package:tutor_app/screens/Settings/settings_screen.dart';
@@ -17,6 +18,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+
+  final List<String> _selectTitle = [
+    "Homepage",
+    "Courses",
+    "Upcoming",
+    "Tutor",
+    "Settings",
+  ];
+
   void onTapHandler(int value) {
     setState(() {
       _selectedIndex = value;
@@ -44,15 +54,19 @@ class _HomeScreenState extends State<HomeScreen> {
         titleTextStyle:
             TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         backgroundColor: Colors.white,
-        title: Text('Home'),
+        title: Text(_selectTitle[_selectedIndex]),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (builder) => ProfileScreen()));
-            },
-            icon: const Icon(Icons.person),
-          )
+          if (_selectedIndex == 0)
+            IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (builder) => ProfileScreen()));
+              },
+              icon: const Icon(
+                Icons.person,
+                color: Colors.black,
+              ),
+            )
         ],
       ),
       body: getBody(),
