@@ -29,7 +29,50 @@ class TutorsDetailScreen extends StatelessWidget {
                 color: Colors.blue,
                 textColor: Colors.white,
                 sizeFont: 20,
-                press: () {},
+                press: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Scaffold(
+                          appBar: AppBar(
+                            title: Text("Pick your date"),
+                          ),
+                          body: SingleChildScrollView(
+                            child: Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  RoundedButton(
+                                    text: "2022-03-05",
+                                    press: () {},
+                                  ),
+                                  RoundedButton(
+                                    text: "2022-03-05",
+                                    press: () {},
+                                  ),
+                                  RoundedButton(
+                                    text: "2022-03-05",
+                                    press: () {},
+                                  ),
+                                  RoundedButton(
+                                    text: "2022-03-05",
+                                    press: () {},
+                                  ),
+                                  RoundedButton(
+                                    text: "2022-03-05",
+                                    press: () {},
+                                  ),
+                                  RoundedButton(
+                                    text: "2022-03-05",
+                                    press: () {},
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      });
+                },
                 text: "Booking",
               ),
             ),
