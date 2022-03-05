@@ -24,23 +24,29 @@ class TutorContainer extends StatelessWidget {
                     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Tutor name',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          Icon(Icons.star, color: Colors.yellow),
-                          Icon(Icons.star, color: Colors.yellow),
-                          Icon(Icons.star, color: Colors.yellow),
-                          Icon(Icons.star_half, color: Colors.yellow),
-                          Icon(Icons.star_outline, color: Colors.yellow),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 3),
+                        child: const Text('Tutor name',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.only(top: 3),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Icon(Icons.star, color: Colors.yellow),
+                            Icon(Icons.star, color: Colors.yellow),
+                            Icon(Icons.star, color: Colors.yellow),
+                            Icon(Icons.star_half, color: Colors.yellow),
+                            Icon(Icons.star_outline, color: Colors.yellow),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 3),
                         child: Row(
                           children: const [
                             RoundedTabText(
