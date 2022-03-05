@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tutor_app/screens/Conference/widgets/time_container.dart';
@@ -44,7 +45,10 @@ class ConferenceScreen extends StatelessWidget {
                         IconButton(
                             icon: Icon(FontAwesomeIcons.facebookMessenger)),
                         IconButton(icon: Icon(FontAwesomeIcons.fistRaised)),
-                        IconButton(icon: Icon(FontAwesomeIcons.video)),
+                        IconButton(
+                          icon: Icon(CupertinoIcons.arrow_right),
+                          onPressed: () => Navigator.pop(context),
+                        ),
                       ],
                     ),
                   ),
