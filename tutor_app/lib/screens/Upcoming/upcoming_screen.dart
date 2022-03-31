@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/models/schedule.dart';
+import 'package:intl/intl.dart';
 import 'package:tutor_app/screens/Conference/conference_screen.dart';
 import 'package:tutor_app/screens/Upcoming/widgets/upcoming_lesson.dart';
 
@@ -11,23 +13,21 @@ class UpcomingScreen extends StatelessWidget {
         padding: EdgeInsets.only(top: 5),
         child: SingleChildScrollView(
           child: Column(children: [
-            UpcomingLeasson(
-              date: '3/4/2022',
-              time: "13:00 - 14:00",
-              tutorName: "Dinh Phat",
-              press: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (builder) => ConferenceScreen()));
-              },
-            ),
-            UpcomingLeasson(
-              date: '3/4/2022',
-              time: "13:00 - 14:00",
-              tutorName: "Dinh Phat",
-              press: () {},
-            ),
+            ...List.generate(ScheduleDummy.offData.length, (index) {
+              Schedule temp = ScheduleDummy.offData[index];
+              final start = DateTime.fromMillisecondsSinceEpoch(
+                  int.parse(temp.startTime));
+              final end =
+                  DateTime.fromMillisecondsSinceEpoch(int.parse(temp.endTime));
+              return UpcomingLeasson(
+                tutorName: 'abc',
+                date: DateFormat.yMd().format(start).toString(),
+                time: DateFormat.Hms().format(start).toString() +
+                    ' - ' +
+                    DateFormat.Hms().format(end).toString(),
+                press: () {},
+              );
+            })
           ]),
         ));
   }
