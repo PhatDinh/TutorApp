@@ -14,7 +14,7 @@ class EditFieldContainer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Align(alignment: Alignment(-1, 0), child: Text(boxName)),
+            Align(alignment: Alignment(-1, 0), child: Text('Phone Number')),
             Container(
               width: size.width * 0.9,
               margin: EdgeInsets.symmetric(vertical: 5),

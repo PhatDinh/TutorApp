@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/models/user_dummy.dart';
 import 'package:tutor_app/screens/Profile/widgets/date_button.dart';
 import 'package:tutor_app/screens/Profile/widgets/edit_drop_button.dart';
 import 'package:tutor_app/screens/Profile/widgets/edit_field_container.dart';
 import 'package:tutor_app/screens/Settings/settings_screen.dart';
+import 'package:tutor_app/screens/Settings/widgets/profile_header.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 import 'package:tutor_app/widgets/rounded_input_field.dart';
 
@@ -23,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
             Column(
               children: [
                 EditFieldContainer(
-                  boxName: "Phone Number",
+                  boxName: UserDummy.phone,
                 ),
                 DateEditButton(
                   boxName: "Birthday",
@@ -31,19 +33,19 @@ class ProfileScreen extends StatelessWidget {
                 EditDropButton(
                   boxName: "Country",
                   items: ['Easy', 'Med', 'Hard'],
-                  hintText: 'Please select your country',
+                  hintText: UserDummy.country,
                   startValue: null,
                 ),
                 EditDropButton(
                   boxName: "My Level",
                   items: ['Easy', 'Med', 'Hard'],
-                  hintText: 'Please select your level',
+                  hintText: UserDummy.level,
                   startValue: null,
                 ),
                 EditDropButton(
                   boxName: "Want to learn",
                   items: ['Easy', 'Med', 'Hard'],
-                  hintText: 'Please select want to learn',
+                  hintText: UserDummy.hobby,
                   startValue: null,
                 ),
                 RoundedButton(

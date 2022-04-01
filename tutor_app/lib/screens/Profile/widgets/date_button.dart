@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/models/user_dummy.dart';
 
 class DateEditButton extends StatefulWidget {
   String boxName;
@@ -32,7 +33,7 @@ class _DateEditButtonState extends State<DateEditButton> {
                     TextField(
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: widget.boxName,
+                        hintText: UserDummy.birthday,
                       ),
                     ),
                     Padding(

@@ -1,3 +1,5 @@
+import 'package:tutor_app/models/feedback.dart';
+
 class User {
   String id;
   String email;
