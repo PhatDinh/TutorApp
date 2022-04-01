@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/models/course.dart';
 import 'package:tutor_app/screens/Courses/widgets/overview_container.dart';
 import 'package:tutor_app/screens/Tutor/widgets/section_box.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
@@ -8,10 +9,13 @@ class CourseDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Course course =
+        (ModalRoute.of(context).settings.arguments as Map)['course'];
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: Text("Course name"),
+          title: Text(course.name),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -32,23 +36,37 @@ class CourseDetailScreen extends StatelessWidget {
                 ),
                 //Overview
                 OverviewContainer(
-                  reason:
-                      'Looking for some variety in your lesson topics? Immerse yourself in English discussion with this set of engaging topics.',
-                  result:
-                      'This course covers vocabulary at the CEFR B1-B2 levels. You will work on improving fluency and comprehension by discussing a variety of topics. In addition, you will receive corrections from a native English speaker to help improve your grammatical accuracy.',
+                  reason: course.reason,
+                  result: course.purpose,
                 ),
                 SectionBox(
                   sectionName: 'Experience Level',
-                  child: Text('Intermediate'),
+                  child: Text(course.level),
                 ),
                 SectionBox(
                   sectionName: 'Course Length',
-                  child: Text('10 topics'),
+                  child: Text(course.topics.length.toString() + ' topics'),
                 ),
                 SectionBox(
-                  sectionName: 'List topic',
-                  child: Text('10 topics'),
-                ),
+                    sectionName: 'List topic',
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ...List.generate(course.topics.length, (index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, bottom: 8),
+                              child: Text(index.toString() +
+                                  ' ' +
+                                  course.topics[index].name),
+                            );
+                          })
+                        ],
+                      ),
+                    )),
               ],
             ),
           ),

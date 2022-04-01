@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:lorem_ipsum/lorem_ipsum.dart';
+
 import 'topic.dart';
 import 'category.dart';
 
@@ -93,5 +97,37 @@ class Course {
       data['categories'] = this.categories.map((v) => v.toJson()).toList();
     }
     return data;
+  }
+}
+
+class CourseDummy {
+  static List<Course> offData = generateData(10);
+
+  static Course generate() {
+    final rd = new Random();
+    return Course(
+        name: loremIpsum(paragraphs: 1, words: 5),
+        description: loremIpsum(paragraphs: 1, words: 200),
+        imageUrl: 'assets/images/demoCourse.jpg',
+        reason: loremIpsum(paragraphs: 1, words: 50),
+        purpose: loremIpsum(paragraphs: 1, words: 50),
+        level: loremIpsum(paragraphs: 1, words: 1),
+        topics: generateDummy(2 + rd.nextInt(8)));
+  }
+
+  static List<Course> generateData(int num) {
+    List<Course> temp = [];
+    for (int i = 0; i < num; i++) {
+      temp.add(generate());
+    }
+    return temp;
+  }
+
+  static List<Topics> generateDummy(int num) {
+    List<Topics> temp = [];
+    for (int i = 0; i < num; i++) {
+      temp.add(TopicsDummy.generate());
+    }
+    return temp;
   }
 }

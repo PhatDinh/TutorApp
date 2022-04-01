@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:lorem_ipsum/lorem_ipsum.dart';
+
 class Topics {
   String id;
   String courseId;
@@ -44,5 +48,24 @@ class Topics {
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     return data;
+  }
+}
+
+class TopicsDummy {
+  static List<Topics> offData = generateData(10);
+  static Topics generate() {
+    //inal rd = new Random();
+    return Topics(
+      name: loremIpsum(paragraphs: 1, words: 5),
+      description: loremIpsum(paragraphs: 1, words: 200),
+    );
+  }
+
+  static List<Topics> generateData(int num) {
+    List<Topics> temp;
+    for (int i = 0; i < num; i++) {
+      temp.add(generate());
+    }
+    return temp;
   }
 }
