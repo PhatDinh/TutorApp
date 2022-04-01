@@ -2,12 +2,35 @@ import 'package:flutter/material.dart';
 
 class TextBox extends StatelessWidget {
   final String boxName;
+  final double boxRating;
   final String boxDetail;
   const TextBox({
     Key key,
     this.boxName,
+    this.boxRating,
     this.boxDetail,
   }) : super(key: key);
+
+  List<Widget> calcStar(double avg) {
+    List<Widget> numStar = [];
+    int i = 1;
+    while (i <= avg) {
+      numStar.add(Icon(Icons.star, color: Colors.yellow));
+      if (avg - i <= 0.5)
+        break;
+      else
+        i++;
+    }
+    if (avg - i == 0.5) {
+      numStar.add(Icon(Icons.star_half, color: Colors.yellow));
+      i++;
+    }
+    while (i < 5) {
+      numStar.add(Icon(Icons.star_outline, color: Colors.yellow));
+      i++;
+    }
+    return numStar;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +50,19 @@ class TextBox extends StatelessWidget {
               children: [
                 Text(
                   boxName,
+                  maxLines: 1,
+                  overflow: TextOverflow.clip,
                   style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25,
+                      color: Colors.red,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  children: calcStar(boxRating),
                 ),
                 Text(
                   boxDetail,
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.black, fontSize: 10),
                 ),
               ],
             ),
