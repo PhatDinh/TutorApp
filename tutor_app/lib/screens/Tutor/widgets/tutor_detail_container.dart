@@ -16,6 +16,7 @@ class TutorDetailContainer extends StatelessWidget {
       else
         i++;
     }
+    if (avg == 0) i -= 1;
     if (avg - i == 0.5) {
       numStar.add(Icon(Icons.star_half, color: Colors.yellow));
       i++;

@@ -10,6 +10,7 @@ class TutorContainer extends StatelessWidget {
   List<Widget> calcStar(double avg) {
     List<Widget> numStar = [];
     int i = 1;
+
     while (i <= avg) {
       numStar.add(Icon(Icons.star, color: Colors.yellow));
       if (avg - i <= 0.5)
@@ -17,6 +18,7 @@ class TutorContainer extends StatelessWidget {
       else
         i++;
     }
+    if (avg == 0) i -= 1;
     if (avg - i == 0.5) {
       numStar.add(Icon(Icons.star_half, color: Colors.yellow));
       i++;
