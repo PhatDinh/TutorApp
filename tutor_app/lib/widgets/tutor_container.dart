@@ -31,7 +31,8 @@ class TutorContainer extends StatelessWidget {
   }
 
   List<Widget> listSpec(String spec) {
-    List<String> temp = spec.split(' ');
+    print(spec);
+    List<String> temp = spec.split(',');
     return List.generate(temp.length, (index) {
       return RoundedTabText(nameTab: temp[index]);
     });
@@ -56,7 +57,15 @@ class TutorContainer extends StatelessWidget {
                 Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   TextButton(
                     onPressed: () {},
-                    child: const Icon(Icons.account_circle, size: 64),
+                    child: SizedBox(
+                      height: 60,
+                      width: 50,
+                      child: ClipOval(
+                        child: Image.network(
+                          tutor.avatar,
+                        ),
+                      ),
+                    ),
                   ),
                   Expanded(
                     child: Column(
@@ -80,7 +89,7 @@ class TutorContainer extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 3),
                             child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                children: calcStar(tutor.avg)),
+                                children: calcStar(5)),
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
@@ -100,10 +109,13 @@ class TutorContainer extends StatelessWidget {
                 ]),
                 Padding(
                   padding: EdgeInsets.only(top: 12),
-                  child: Text(
-                    tutor.bio,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      tutor.bio,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
                   ),
                 ),
               ])),

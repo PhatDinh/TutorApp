@@ -25,7 +25,7 @@ class CourseContainer extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Image.asset(
+              Image.network(
                 course.imageUrl,
                 height: size.height * 0.3,
               ),

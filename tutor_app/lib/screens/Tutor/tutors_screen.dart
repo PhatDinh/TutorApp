@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/models/tutor.dart';
+import 'package:tutor_app/screens/Tutor/tutor_manager.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 import 'package:tutor_app/widgets/rounded_input_field.dart';
 import 'package:tutor_app/widgets/rounded_search_field.dart';
 import 'package:tutor_app/widgets/rounded_tab_text.dart';
 import 'package:tutor_app/widgets/tutor_container.dart';
 
-class TutorsScreen extends StatelessWidget {
+class TutorsScreen extends StatefulWidget {
   const TutorsScreen({Key key}) : super(key: key);
+
+  @override
+  State<TutorsScreen> createState() => _TutorsScreenState();
+}
+
+class _TutorsScreenState extends State<TutorsScreen> {
+  List<Tutor> tutorList = [];
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    TutorManager.fetchTutor().then((value) {
+      setState(() {
+        tutorList = value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +70,10 @@ class TutorsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              ...List.generate(
-                TutorDummy.offData.length,
-                (index) {
-                  return TutorContainer(tutor: TutorDummy.offData[index]);
-                },
-              )
+              ...List.generate(tutorList.length, (index) {
+                print(tutorList[index]);
+                return TutorContainer(tutor: tutorList[index]);
+              })
             ],
           )),
     );

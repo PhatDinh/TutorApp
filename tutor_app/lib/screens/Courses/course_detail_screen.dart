@@ -23,8 +23,8 @@ class CourseDetailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  'assets/images/demoPic.png',
+                Image.network(
+                  course.imageUrl,
                   height: size.height * 0.3,
                   width: size.width,
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/models/course.dart';
+import 'package:tutor_app/screens/Courses/course_manager.dart';
 import 'package:tutor_app/widgets/course_container.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 import 'package:tutor_app/widgets/rounded_input_field.dart';
@@ -7,8 +8,26 @@ import 'package:tutor_app/widgets/rounded_search_field.dart';
 import 'package:tutor_app/widgets/rounded_tab_text.dart';
 import 'package:tutor_app/widgets/tutor_container.dart';
 
-class CoursesScreen extends StatelessWidget {
+class CoursesScreen extends StatefulWidget {
   const CoursesScreen({Key key}) : super(key: key);
+
+  @override
+  State<CoursesScreen> createState() => _CoursesScreenState();
+}
+
+class _CoursesScreenState extends State<CoursesScreen> {
+  List<Course> courseList = [];
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    CourseManager.fetchCourse().then((value) {
+      setState(() {
+        courseList = value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +67,9 @@ class CoursesScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              ...List.generate(CourseDummy.offData.length, (index) {
-                Course temp = CourseDummy.offData[index];
+              ...List.generate(courseList.length, (index) {
                 return CourseContainer(
-                  course: temp,
+                  course: courseList[index],
                 );
               })
             ],

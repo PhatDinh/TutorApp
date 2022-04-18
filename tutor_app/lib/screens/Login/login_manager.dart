@@ -12,7 +12,7 @@ class LoginManager {
       },
       body: jsonEncode(<String, String>{"email": email, "password": pass}),
     );
-    print(res.body);
+
     if (res.statusCode == 200) {
       String token = jsonDecode(res.body)['tokens']['access']['token'];
       final prefs = await SharedPreferences.getInstance();
