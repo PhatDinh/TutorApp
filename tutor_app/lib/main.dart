@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/screens/Courses/course_detail_screen.dart';
+import 'package:tutor_app/screens/Home/home_screen.dart';
 import 'package:tutor_app/screens/Login/login_screen.dart';
 import 'package:tutor_app/screens/Tutor/tutors_detail_screen.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/tutor-detail': (context) => TutorsDetailScreen(),
         '/course-detail': (context) => CourseDetailScreen(),
+        '/home': (context) => HomeScreen(),
       },
     );
   }

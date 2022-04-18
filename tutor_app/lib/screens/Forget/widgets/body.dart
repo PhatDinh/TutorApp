@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/screens/Login/login_manager.dart';
 import 'package:tutor_app/screens/Login/widgets/background.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 import 'package:tutor_app/widgets/rounded_input_field.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  String email;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +46,17 @@ class Body extends StatelessWidget {
           ),
           RoundedInputField(
             hintText: "Enter your email",
+            onChanged: (value) {
+              setState(() {
+                email = value;
+              });
+            },
           ),
           RoundedButton(
             text: 'SEND',
-            press: () {},
+            press: () {
+              LoginManager.forgot(email);
+            },
           )
         ],
       ),
