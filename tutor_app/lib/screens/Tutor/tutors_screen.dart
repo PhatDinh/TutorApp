@@ -71,7 +71,6 @@ class _TutorsScreenState extends State<TutorsScreen> {
                 ),
               ),
               ...List.generate(tutorList.length, (index) {
-                print(tutorList[index]);
                 return TutorContainer(tutor: tutorList[index]);
               })
             ],

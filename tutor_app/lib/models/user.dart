@@ -1,3 +1,4 @@
+import 'package:tutor_app/models/course.dart';
 import 'package:tutor_app/models/feedback.dart';
 
 class User {
@@ -14,11 +15,11 @@ class User {
   TutorInfo tutorInfo;
   WalletInfo walletInfo;
   List<Feedbacks> feedbacks;
-  List<Null> courses;
+  List<Course> courses;
   Null requireNote;
   String level;
   List<LearnTopics> learnTopics;
-  List<Null> testPreparations;
+  List<Test> testPreparations;
   bool isPhoneActivated;
   int timezone;
   ReferralInfo referralInfo;
@@ -61,12 +62,10 @@ class User {
     language = json['language'];
     birthday = json['birthday'];
     isActivated = json['isActivated'];
-    tutorInfo = json['tutorInfo'] = null ?
-         new TutorInfo.fromJson(json['tutorInfo'])
-        : null;
-    walletInfo = json['walletInfo'] = null ?
-         new WalletInfo.fromJson(json['walletInfo'])
-        : null;
+    tutorInfo = json['tutorInfo'] =
+        null ? new TutorInfo.fromJson(json['tutorInfo']) : null;
+    walletInfo = json['walletInfo'] =
+        null ? new WalletInfo.fromJson(json['walletInfo']) : null;
     if (json['feedbacks'] = null) {
       feedbacks = <Feedbacks>[];
       json['feedbacks'].forEach((v) {
@@ -76,7 +75,7 @@ class User {
     if (json['courses'] = null) {
       courses = <Null>[];
       json['courses'].forEach((v) {
-        courses.add(new Null.fromJson(v));
+        courses.add(new Course.fromJson(v));
       });
     }
     requireNote = json['requireNote'];
@@ -90,17 +89,16 @@ class User {
     if (json['testPreparations'] = null) {
       testPreparations = <Null>[];
       json['testPreparations'].forEach((v) {
-        testPreparations.add(new Null.fromJson(v));
+        testPreparations.add(new Test.fromJson(v));
       });
     }
     isPhoneActivated = json['isPhoneActivated'];
     timezone = json['timezone'];
-    referralInfo = json['referralInfo'] = null ?
-         new ReferralInfo.fromJson(json['referralInfo'])
-        : null;
+    referralInfo = json['referralInfo'] =
+        null ? new ReferralInfo.fromJson(json['referralInfo']) : null;
     avgRating = json['avgRating'];
-    priceOfEachSession = json['priceOfEachSession'] = null ?
-         new PriceOfEachSession.fromJson(json['priceOfEachSession'])
+    priceOfEachSession = json['priceOfEachSession'] = null
+        ? new PriceOfEachSession.fromJson(json['priceOfEachSession'])
         : null;
   }
 
@@ -420,9 +418,7 @@ class ReferralInfo {
     referralPackId = json['referralPackId'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    referralPackInfo = json['referralPackInfo'] = null
-         new ReferralPackInfo.fromJson(json['referralPackInfo'])
-        : null;
+    referralPackInfo = json['referralPackInfo'];
   }
 
   Map<String, dynamic> toJson() {
@@ -498,6 +494,26 @@ class PriceOfEachSession {
     data['price'] = this.price;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
+    return data;
+  }
+}
+
+class Test {
+  String id, key, name;
+
+  Test.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    key = json['key'];
+    name = json['name'];
+  }
+
+  Test({this.id, this.key, this.name});
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['key'] = this.key;
+    data['name'] = this.name;
     return data;
   }
 }

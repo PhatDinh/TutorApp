@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/models/user.dart';
 import 'package:tutor_app/models/user_dummy.dart';
+import 'package:tutor_app/screens/Profile/profile_manager.dart';
 import 'package:tutor_app/screens/Profile/widgets/date_button.dart';
 import 'package:tutor_app/screens/Profile/widgets/edit_drop_button.dart';
 import 'package:tutor_app/screens/Profile/widgets/edit_field_container.dart';
@@ -8,8 +10,27 @@ import 'package:tutor_app/screens/Settings/widgets/profile_header.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 import 'package:tutor_app/widgets/rounded_input_field.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  User user;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
             Column(
               children: [
                 EditFieldContainer(
-                  boxName: UserDummy.phone,
+                  boxName: user.phone,
                 ),
                 DateEditButton(
                   boxName: "Birthday",
