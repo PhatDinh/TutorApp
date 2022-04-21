@@ -5,6 +5,7 @@ import 'schedule_details.dart';
 class Schedule {
   String id;
   String tutorId;
+  String userId;
   String startTime;
   String endTime;
   int startTimestamp;
@@ -20,6 +21,7 @@ class Schedule {
       this.endTime,
       this.startTimestamp,
       this.endTimestamp,
+      this.userId,
       this.createdAt,
       this.isBooked,
       this.scheduleDetails});
@@ -59,31 +61,3 @@ class Schedule {
   }
 }
 
-class ScheduleDummy {
-  static List<Schedule> offData = generateData(10);
-
-  static Schedule generate() {
-    var rd = Random();
-    final id = (1 + rd.nextInt(10000));
-    final radTime = DateTime.utc(
-      (2000 + rd.nextInt(23)),
-      (1 + rd.nextInt(11)),
-      (1 + rd.nextInt(31)),
-    );
-    print(radTime.millisecondsSinceEpoch.toString());
-    return Schedule(
-      id: id.toString(),
-      startTime: radTime.millisecondsSinceEpoch.toString(),
-      endTime:
-          radTime.add(Duration(hours: 1)).millisecondsSinceEpoch.toString(),
-    );
-  }
-
-  static List<Schedule> generateData(int num) {
-    List<Schedule> temp = [];
-    for (int i = 0; i < num; i++) {
-      temp.add(generate());
-    }
-    return temp;
-  }
-}

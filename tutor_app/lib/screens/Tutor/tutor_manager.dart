@@ -21,4 +21,12 @@ class TutorManager {
     }
     return temp;
   }
+
+  static Tutor findTutor(String tutorID) {
+    List<Tutor> temp = [];
+    TutorManager.fetchTutor().then((value) => temp = value);
+    for (var t in temp) {
+      if (t.id == tutorID) return t;
+    }
+  }
 }

@@ -15,6 +15,8 @@ class ProfileManager {
       },
     );
     final resJson = jsonDecode(res.body)['user'];
-    return User.fromJson(resJson);
+    final t = User.fromJson(resJson);
+    prefs.setString('ID', t.id);
+    return t;
   }
 }

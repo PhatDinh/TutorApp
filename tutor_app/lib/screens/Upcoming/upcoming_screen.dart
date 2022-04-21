@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/models/schedule.dart';
 import 'package:intl/intl.dart';
+import 'package:tutor_app/models/tutor.dart';
 import 'package:tutor_app/screens/Conference/conference_screen.dart';
+import 'package:tutor_app/screens/Tutor/tutor_manager.dart';
+import 'package:tutor_app/screens/Upcoming/schedule_manager.dart';
 import 'package:tutor_app/screens/Upcoming/widgets/upcoming_lesson.dart';
 
-class UpcomingScreen extends StatelessWidget {
+class UpcomingScreen extends StatefulWidget {
   const UpcomingScreen({Key key}) : super(key: key);
+
+  @override
+  State<UpcomingScreen> createState() => _UpcomingScreenState();
+}
+
+class _UpcomingScreenState extends State<UpcomingScreen> {
+  List<Schedule> upcomingList = [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ScheduleManager.fetchUpcoming().then((value) {
+      setState(() {
+        upcomingList = value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +33,15 @@ class UpcomingScreen extends StatelessWidget {
         padding: EdgeInsets.only(top: 5),
         child: SingleChildScrollView(
           child: Column(children: [
-            ...List.generate(ScheduleDummy.offData.length, (index) {
-              Schedule temp = ScheduleDummy.offData[index];
+            ...List.generate(upcomingList.length, (index) {
+              Schedule temp = upcomingList[index];
+              Tutor tutor = TutorManager.findTutor(temp.tutorId);
               final start = DateTime.fromMillisecondsSinceEpoch(
                   int.parse(temp.startTime));
               final end =
                   DateTime.fromMillisecondsSinceEpoch(int.parse(temp.endTime));
               return UpcomingLeasson(
-                tutorName: 'abc',
+                tutorName: tutor.name,
                 date: DateFormat.yMd().format(start).toString(),
                 time: DateFormat.Hms().format(start).toString() +
                     ' - ' +
