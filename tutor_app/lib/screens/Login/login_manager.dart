@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutor_app/models/user.dart';
 
 class LoginManager {
-  static Future<http.Response> login(String email, String pass) async {
+  static Future<bool> login(String email, String pass) async {
     final res = await http.post(
       Uri.parse('https://sandbox.api.lettutor.com/auth/login'),
       headers: <String, String>{
@@ -32,8 +32,10 @@ class LoginManager {
       //get email
       String email = jsonDecode(res.body)['user']['email'];
       await prefs.setString('email', email);
+
+      return true;
     }
-    return res;
+    return false;
   }
 
   static Future<http.Response> register(String email, String pass) async {

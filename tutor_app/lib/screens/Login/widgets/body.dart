@@ -69,9 +69,13 @@ class _BodyState extends State<Body> {
                 )),
           ),
           RoundedButton(
-            press: () {
-              LoginManager.login(email, pass);
-              Navigator.pushNamed(context, '/home');
+            press: () async {
+              final res = await LoginManager.login(email, pass);
+              print(res);
+              if (res == true) {
+                //Login
+                Navigator.pushNamed(context, '/home');
+              }
             },
             text: "LOGIN",
           ),
