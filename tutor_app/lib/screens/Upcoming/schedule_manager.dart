@@ -19,7 +19,6 @@ class ScheduleManager {
     final resJson = jsonDecode(res.body)['data']['rows'];
     for (var t in resJson) {
       final schedule = Schedule.fromJson(t);
-      print(schedule);
       if (schedule.userId == prefs.getString('id'))
         temp.add(Schedule.fromJson(t));
     }

@@ -3,9 +3,16 @@ import 'package:tutor_app/models/tutor.dart';
 import 'package:tutor_app/screens/Tutor/tutors_detail_screen.dart';
 import 'rounded_tab_text.dart';
 
-class TutorContainer extends StatelessWidget {
+class TutorContainer extends StatefulWidget {
   final Tutor tutor;
   const TutorContainer({Key key, this.tutor}) : super(key: key);
+
+  @override
+  State<TutorContainer> createState() => _TutorContainerState();
+}
+
+class _TutorContainerState extends State<TutorContainer> {
+  bool isFavorite = false;
 
   List<Widget> calcStar(double avg) {
     List<Widget> numStar = [];
@@ -45,7 +52,7 @@ class TutorContainer extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, '/tutor-detail',
-              arguments: {'tutor': tutor});
+              arguments: {'tutor': widget.tutor});
         },
         child: Card(
           shape: const RoundedRectangleBorder(
@@ -62,7 +69,7 @@ class TutorContainer extends StatelessWidget {
                       width: 50,
                       child: ClipOval(
                         child: Image.network(
-                          tutor.avatar,
+                          widget.tutor.avatar,
                         ),
                       ),
                     ),
@@ -76,7 +83,7 @@ class TutorContainer extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 3),
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.4,
-                              child: Text(tutor.name,
+                              child: Text(widget.tutor.name,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   style: TextStyle(
@@ -96,7 +103,7 @@ class TutorContainer extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 3),
                               child: Row(
-                                children: listSpec(tutor.specialties),
+                                children: listSpec(widget.tutor.specialties),
                               ),
                             ),
                           ),
@@ -104,15 +111,21 @@ class TutorContainer extends StatelessWidget {
                   ),
                   //const Spacer(),
                   TextButton(
-                      onPressed: () {},
-                      child: const Icon(Icons.favorite_border)),
+                      onPressed: () {
+                        setState(() {
+                          isFavorite = !isFavorite;
+                        });
+                      },
+                      child: isFavorite
+                          ? const Icon(Icons.favorite)
+                          : const Icon(Icons.favorite_border)),
                 ]),
                 Padding(
                   padding: EdgeInsets.only(top: 12),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      tutor.bio,
+                      widget.tutor.bio,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),

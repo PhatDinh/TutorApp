@@ -43,9 +43,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
     return Row(
       //mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
-          Icons.circle,
-          size: 50,
+        SizedBox(
+          height: 50,
+          width: 50,
+          child: ClipOval(child: Image.network(avatar)),
         ),
         SizedBox(
           width: 8,

@@ -8,7 +8,7 @@ class ProfileManager {
   static Future<User> fetchProfile() async {
     final prefs = await SharedPreferences.getInstance();
     final res = await http.get(
-      Uri.parse('https://sandbox.api.lettutor.com/course?page=1&size=100'),
+      Uri.parse('https://sandbox.api.lettutor.com/user/info'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + prefs.getString('token'),
@@ -16,7 +16,8 @@ class ProfileManager {
     );
     final resJson = jsonDecode(res.body)['user'];
     final t = User.fromJson(resJson);
-    prefs.setString('ID', t.id);
+    print(1);
+    print(t);
     return t;
   }
 }

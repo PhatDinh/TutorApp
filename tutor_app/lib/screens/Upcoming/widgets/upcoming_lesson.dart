@@ -6,11 +6,13 @@ class UpcomingLeasson extends StatelessWidget {
   final String tutorName;
   final String time;
   final Function press;
+  final String tutorAvatar;
   final bool isHistory;
 
   const UpcomingLeasson(
       {Key key,
       this.tutorName,
+      this.tutorAvatar,
       this.date,
       this.time,
       this.press,
@@ -31,7 +33,10 @@ class UpcomingLeasson extends StatelessWidget {
                   Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     TextButton(
                       onPressed: () {},
-                      child: const Icon(Icons.account_circle, size: 64),
+                      child: SizedBox(
+                          height: 60,
+                          width: 50,
+                          child: ClipOval(child: Image.network(tutorAvatar))),
                     ),
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

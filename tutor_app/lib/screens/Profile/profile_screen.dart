@@ -30,6 +30,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
+    ProfileManager.fetchProfile().then((value) {
+      print(0);
+      print(value);
+      setState(() {
+        user = value;
+      });
+    });
   }
 
   @override
