@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tutor_app/libary.dart';
 import 'package:tutor_app/screens/Courses/course_detail_screen.dart';
 import 'package:tutor_app/screens/Home/home_screen.dart';
 import 'package:tutor_app/screens/Login/login_screen.dart';
@@ -14,12 +16,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final prefs = SharedPreferences.getInstance();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: Style.lightMode,
+      darkTheme: Style.darkMode,
+      themeMode: ThemeMode.dark,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: LoginScreen(),
       routes: {
         '/tutor-detail': (context) => TutorsDetailScreen(),

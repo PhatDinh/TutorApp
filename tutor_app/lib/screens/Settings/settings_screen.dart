@@ -23,8 +23,6 @@ class SettingScreen extends StatelessWidget {
             color: Colors.grey,
           ),
           RoundedSettingButton(
-            color: Colors.white,
-            textColor: Colors.black,
             icon: Icons.person,
             text: "View Feedbacks",
             press: () {},

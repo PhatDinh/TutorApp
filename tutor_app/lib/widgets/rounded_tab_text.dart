@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class RoundedTabText extends StatelessWidget {
   final String nameTab;
+  final VoidCallback onTap;
   const RoundedTabText({
     this.nameTab,
+    this.onTap = null,
     Key key,
   }) : super(key: key);
 
@@ -12,10 +14,14 @@ class RoundedTabText extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(right: 8),
       child: OutlinedButton(
-        onPressed: null,
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+                Theme.of(context).buttonColor)),
+        onPressed: onTap,
         child: Text(
           nameTab,
-          style: TextStyle(fontSize: 12),
+          style: TextStyle(
+              fontSize: 12, color: Theme.of(context).textTheme.button.color),
         ),
       ),
     );

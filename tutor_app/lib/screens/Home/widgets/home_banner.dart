@@ -11,8 +11,8 @@ class HomeBanner extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
+      color: Theme.of(context).primaryColor,
       height: size.height * 0.3,
-      color: Colors.lightBlue,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -23,8 +23,6 @@ class HomeBanner extends StatelessWidget {
           ),
           RoundedButton(
             sizeButton: 0.35,
-            color: Colors.white,
-            textColor: Colors.blue,
             sizeFont: 10,
             press: () {},
             text: "Book a lesson",

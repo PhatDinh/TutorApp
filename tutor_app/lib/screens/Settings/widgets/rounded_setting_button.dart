@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class RoundedSettingButton extends StatelessWidget {
   final String text;
   final Function press;
-  final Color color, textColor, borderColor, iconColor;
+  final Color borderColor;
   final double sizeButton;
   final double sizeFont;
   final IconData icon;
@@ -13,9 +13,6 @@ class RoundedSettingButton extends StatelessWidget {
     this.text,
     this.sizeFont = 14,
     this.press,
-    this.color = Colors.white,
-    this.textColor = Colors.black,
-    this.iconColor = Colors.black,
     this.borderColor = Colors.grey,
     this.icon,
   }) : super(key: key);
@@ -39,12 +36,13 @@ class RoundedSettingButton extends StatelessWidget {
       width: size.width * sizeButton,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(29),
-        child: newElevatedButton(),
+        child: newElevatedButton(Theme.of(context).textTheme.button.color,
+            Theme.of(context).buttonColor, Theme.of(context).iconTheme.color),
       ),
     );
   }
 
-  Widget newElevatedButton() {
+  Widget newElevatedButton(Color textColor, Color btnColor, Color iconColor) {
     return ElevatedButton.icon(
       label: Text(
         text,
@@ -57,7 +55,7 @@ class RoundedSettingButton extends StatelessWidget {
       onPressed: press,
       style: ElevatedButton.styleFrom(
           alignment: Alignment(-1, 0),
-          primary: color,
+          primary: btnColor,
           padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           textStyle: TextStyle(
               color: textColor,

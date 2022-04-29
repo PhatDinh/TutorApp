@@ -16,8 +16,6 @@ class ProfileManager {
     );
     final resJson = jsonDecode(res.body)['user'];
     final t = User.fromJson(resJson);
-    print(1);
-    print(t);
     return t;
   }
 }

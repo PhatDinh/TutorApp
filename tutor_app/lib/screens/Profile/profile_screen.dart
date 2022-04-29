@@ -31,8 +31,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     ProfileManager.fetchProfile().then((value) {
-      print(0);
-      print(value);
       setState(() {
         user = value;
       });
@@ -56,24 +54,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   boxName: user.phone,
                 ),
                 DateEditButton(
-                  boxName: "Birthday",
+                  boxName: user.birthday,
                 ),
                 EditDropButton(
-                  boxName: "Country",
+                  boxName: 'Country',
                   items: ['Easy', 'Med', 'Hard'],
                   hintText: UserDummy.country,
                   startValue: null,
                 ),
                 EditDropButton(
-                  boxName: "My Level",
+                  boxName: 'Level',
                   items: ['Easy', 'Med', 'Hard'],
                   hintText: UserDummy.level,
-                  startValue: null,
-                ),
-                EditDropButton(
-                  boxName: "Want to learn",
-                  items: ['Easy', 'Med', 'Hard'],
-                  hintText: UserDummy.hobby,
                   startValue: null,
                 ),
                 RoundedButton(

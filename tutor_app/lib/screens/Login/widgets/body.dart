@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/screens/Forget/forget_screen.dart';
-import 'package:tutor_app/screens/Home/home_screen.dart';
+//import 'package:tutor_app/screens/Home/home_screen.dart';
 import 'package:tutor_app/screens/Login/login_manager.dart';
 import 'package:tutor_app/screens/Register/register_screen.dart';
 import 'package:tutor_app/widgets/already_have_an_account_check.dart';
@@ -38,7 +38,7 @@ class _BodyState extends State<Body> {
           const Text(
             "LET TUTOR",
             style: TextStyle(
-              color: Colors.blue,
+              //color: Colors.blue,
               fontSize: 20,
             ),
           ),

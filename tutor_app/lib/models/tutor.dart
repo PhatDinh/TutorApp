@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
 import 'package:tutor_app/models/course.dart';
+import 'package:tutor_app/models/review.dart';
 
 class Tutor {
   double avg;
@@ -25,7 +26,7 @@ class Tutor {
   String createdAt;
   String updatedAt;
   String deletedAt;
-  List<Feedbacks> feedbacks;
+  List<Review> review;
   String id;
   String userId;
   String video;
@@ -66,7 +67,7 @@ class Tutor {
       this.createdAt,
       this.updatedAt,
       this.deletedAt,
-      this.feedbacks,
+      this.review,
       this.id,
       this.userId,
       this.video,
@@ -106,10 +107,10 @@ class Tutor {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     deletedAt = json['deletedAt'];
-    if (json['feedbacks'] != null) {
-      feedbacks = <Feedbacks>[];
-      json['feedbacks'].forEach((v) {
-        feedbacks.add(new Feedbacks.fromJson(v));
+    if (json['review'] != null) {
+      review = <Review>[];
+      json['review'].forEach((v) {
+        review.add(new Review.fromJson(v));
       });
     }
     id = json['id'];
@@ -153,8 +154,8 @@ class Tutor {
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     data['deletedAt'] = this.deletedAt;
-    if (this.feedbacks != null) {
-      data['feedbacks'] = this.feedbacks.map((v) => v.toJson()).toList();
+    if (this.review != null) {
+      data['review'] = this.review.map((v) => v.toJson()).toList();
     }
     data['id'] = this.id;
     data['userId'] = this.userId;
@@ -173,87 +174,5 @@ class Tutor {
     data['price'] = this.price;
     data['isOnline'] = this.isOnline;
     return data;
-  }
-}
-
-class Feedbacks {
-  String id;
-  String bookingId;
-  String firstId;
-  String secondId;
-  int rating;
-  String content;
-  String createdAt;
-  String updatedAt;
-  Tutor firstInfo;
-
-  Feedbacks(
-      {this.id,
-      this.bookingId,
-      this.firstId,
-      this.secondId,
-      this.rating,
-      this.content,
-      this.createdAt,
-      this.updatedAt,
-      this.firstInfo});
-
-  Feedbacks.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    bookingId = json['bookingId'];
-    firstId = json['firstId'];
-    secondId = json['secondId'];
-    rating = json['rating'];
-    content = json['content'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    firstInfo = json['firstInfo'] != null
-        ? new Tutor.fromJson(json['firstInfo'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['bookingId'] = this.bookingId;
-    data['firstId'] = this.firstId;
-    data['secondId'] = this.secondId;
-    data['rating'] = this.rating;
-    data['content'] = this.content;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    if (this.firstInfo != null) {
-      data['firstInfo'] = this.firstInfo.toJson();
-    }
-    return data;
-  }
-}
-
-class TutorDummy {
-  static List<Tutor> offData = generateData(20);
-
-  static Tutor generate() {
-    var rd = Random();
-    //final id = (1 + rd.nextInt(10000));
-    return Tutor(
-      name: loremIpsum(paragraphs: 1, words: 3),
-      country: loremIpsum(paragraphs: 1, words: 3),
-      languages: loremIpsum(paragraphs: 1, words: 1 + rd.nextInt(4)),
-      education: loremIpsum(paragraphs: 1, words: 5),
-      interests: loremIpsum(paragraphs: 1, words: 5),
-      profession: loremIpsum(paragraphs: 1, words: 5),
-      experience: (1 + rd.nextInt(10)).toString() + ' years',
-      specialties: loremIpsum(paragraphs: 1, words: 1 + rd.nextInt(4)),
-      bio: loremIpsum(paragraphs: 1, words: 200),
-      avg: (1 + rd.nextInt(10)) / 2,
-    );
-  }
-
-  static List<Tutor> generateData(int num) {
-    List<Tutor> temp = [];
-    for (int i = 0; i < num; i++) {
-      temp.add(generate());
-    }
-    return temp;
   }
 }

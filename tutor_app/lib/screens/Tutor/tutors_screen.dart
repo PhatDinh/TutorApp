@@ -19,17 +19,17 @@ class _TutorsScreenState extends State<TutorsScreen> {
   @override
   void initState() {
     super.initState();
+    TutorManager.fetchTutor().then((value) {
+      setState(() {
+        tutorList = value;
+      });
+    });
   }
 
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    TutorManager.fetchTutor().then((value) {
-      setState(() {
-        tutorList = value;
-      });
-    });
   }
 
   @override
@@ -55,7 +55,7 @@ class _TutorsScreenState extends State<TutorsScreen> {
                         nameTab: 'All',
                       ),
                       RoundedTabText(
-                        nameTab: 'English for kids',
+                        nameTab: 'Favorite',
                       ),
                       RoundedTabText(
                         nameTab: 'IELTS',

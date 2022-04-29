@@ -13,7 +13,7 @@ class TutorsDetailScreen extends StatelessWidget {
   const TutorsDetailScreen({Key key}) : super(key: key);
 
   List<Widget> listSpec(String spec) {
-    List<String> temp = spec.split(' ');
+    List<String> temp = spec.split(',');
     return List.generate(temp.length, (index) {
       return RoundedTabText(nameTab: temp[index]);
     });
@@ -22,6 +22,13 @@ class TutorsDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Tutor tutor = (ModalRoute.of(context).settings.arguments as Map)['tutor'];
+    print(tutor.name);
+    print(tutor.specialties);
+    print(tutor.languages);
+    print(tutor.education);
+    print(tutor.interests);
+    print(tutor.experience);
+    print(tutor.profession);
 
     return Scaffold(
       appBar: AppBar(
@@ -31,15 +38,13 @@ class TutorsDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            VideoContainer(),
+            const VideoContainer(),
             TutorDetailContainer(
               tutor: tutor,
             ),
             Center(
               child: RoundedButton(
                 sizeButton: 0.9,
-                color: Colors.blue,
-                textColor: Colors.white,
                 sizeFont: 20,
                 press: () {
                   showModalBottomSheet(
@@ -144,8 +149,8 @@ class TutorsDetailScreen extends StatelessWidget {
             //Rating
             SectionBox(
               sectionName: 'Review',
-              child:
-                  Container(width: double.infinity, child: CarouselTextBox()),
+              //child:
+              //Container(width: double.infinity, child: CarouselTextBox()),
             ),
           ],
         ),

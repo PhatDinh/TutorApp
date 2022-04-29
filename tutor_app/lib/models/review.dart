@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
 import 'package:tutor_app/models/tutor.dart';
 
-class Feedbacks {
+class Review {
   String id;
   String bookingId;
   String firstId;
@@ -16,7 +16,7 @@ class Feedbacks {
   Tutor firstInfo;
   Tutor secondInfo;
 
-  Feedbacks(
+  Review(
       {this.id,
       this.bookingId,
       this.firstId,
@@ -28,7 +28,7 @@ class Feedbacks {
       this.firstInfo,
       this.secondInfo});
 
-  Feedbacks.fromJson(Map<String, dynamic> json) {
+  Review.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     bookingId = json['bookingId'];
     firstId = json['firstId'];
@@ -60,26 +60,5 @@ class Feedbacks {
       data['secondInfo'] = this.secondInfo.toJson();
     }
     return data;
-  }
-}
-
-class FeedbackDummy {
-  static List<Feedbacks> offData = generateData(8);
-
-  static Feedbacks generate() {
-    final rd = new Random();
-    return Feedbacks(
-      rating: (1 + rd.nextInt(10)) / 2,
-      content: loremIpsum(paragraphs: 1, words: 50),
-      firstId: loremIpsum(paragraphs: 1, words: 3),
-    );
-  }
-
-  static List<Feedbacks> generateData(int num) {
-    List<Feedbacks> temp = [];
-    for (int i = 0; i < num; i++) {
-      temp.add(generate());
-    }
-    return temp;
   }
 }
