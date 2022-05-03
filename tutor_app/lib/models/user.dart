@@ -86,24 +86,24 @@ class User {
     updatedAt = json['updatedAt'];
     deletedAt = json['deletedAt'];
     tutorInfo = Tutor.fromJson(json['tutorInfo']);
-    // if (json['roles'] != null) {
-    //   roles = <String>[];
-    //   json['roles'].forEach((v) {
-    //     roles.add(v);
-    //   });
-    // }
-    // if (json['feedbacks'] != null) {
-    //   feedbacks = <Review>[];
-    //   for (var val in json['feedbacks']) {
-    //     feedbacks.add(Review.fromJson(val));
-    //   }
-    // }
-    // if (json['courses'] != null) {
-    //   courses = <Course>[];
-    //   for (var val in json['courses']) {
-    //     courses.add(Course.fromJson(val));
-    //   }
-    // }
+    if (json['roles'] != null) {
+      roles = <String>[];
+      json['roles'].forEach((v) {
+        roles.add(v);
+      });
+    }
+    if (json['feedbacks'] != null) {
+      feedbacks = <Review>[];
+      for (var val in json['feedbacks']) {
+        feedbacks.add(Review.fromJson(val));
+      }
+    }
+    if (json['courses'] != null) {
+      courses = <Course>[];
+      for (var val in json['courses']) {
+        courses.add(Course.fromJson(val));
+      }
+    }
   }
 
   Map<String, dynamic> toJson() {

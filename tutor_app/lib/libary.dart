@@ -1,7 +1,15 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Libary {
   static String webUrl = 'https://lettutor.com/';
+  //Login Screen
+  static List<String> loginEmail = ['Your Email', 'Email của bạn'];
+  static List<String> loginPass = ['Your password', 'Mật khẩu của bạn'];
+  static List<String> login = ['Login', 'Đăng nhập'];
+  static List<String> loginForgot = ['Forgot password ? ', 'Quên mật khẩu ?'];
 }
 
 class Style {
@@ -23,10 +31,12 @@ class Style {
   );
 
   static ThemeData lightMode = ThemeData(
-    textTheme: TextTheme(headline6: TextStyle(color: Colors.blue)),
-    primaryColor: Colors.red,
-    primarySwatch: Colors.blue,
-  );
+      primarySwatch: Colors.blue,
+      buttonColor: Colors.white,
+      //buttonTheme: const ButtonThemeData(buttonColor: primaryBlack),
+      iconTheme: const IconThemeData(color: Colors.black),
+      textTheme: const TextTheme(button: TextStyle(color: Colors.black)));
+
   static ThemeData darkMode = ThemeData(
       //primaryColor: primaryBlack,
       primarySwatch: primaryBlack,

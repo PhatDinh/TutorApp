@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/models/tutor.dart';
+import 'package:tutor_app/screens/Tutor/tutor_manager.dart';
 import 'package:tutor_app/screens/Tutor/tutors_detail_screen.dart';
 import 'rounded_tab_text.dart';
 
 class TutorContainer extends StatefulWidget {
+  final bool isFavorite;
   final Tutor tutor;
-  const TutorContainer({Key key, this.tutor}) : super(key: key);
+  const TutorContainer({Key key, this.tutor, this.isFavorite = false})
+      : super(key: key);
 
   @override
   State<TutorContainer> createState() => _TutorContainerState();
 }
 
 class _TutorContainerState extends State<TutorContainer> {
-  bool isFavorite = false;
-
   List<Widget> calcStar(double avg) {
     List<Widget> numStar = [];
     int i = 1;
@@ -38,7 +39,6 @@ class _TutorContainerState extends State<TutorContainer> {
   }
 
   List<Widget> listSpec(String spec) {
-    print(spec);
     List<String> temp = spec.split(',');
     return List.generate(temp.length, (index) {
       return RoundedTabText(nameTab: temp[index]);
@@ -96,7 +96,7 @@ class _TutorContainerState extends State<TutorContainer> {
                             padding: const EdgeInsets.only(top: 3),
                             child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                children: calcStar(5)),
+                                children: calcStar(widget.tutor.avgRating)),
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
@@ -113,10 +113,11 @@ class _TutorContainerState extends State<TutorContainer> {
                   TextButton(
                       onPressed: () {
                         setState(() {
-                          isFavorite = !isFavorite;
+                          TutorManager.favoriteTutor(widget.tutor.id);
+                          setState(() {});
                         });
                       },
-                      child: isFavorite
+                      child: widget.isFavorite
                           ? const Icon(Icons.favorite)
                           : const Icon(Icons.favorite_border)),
                 ]),

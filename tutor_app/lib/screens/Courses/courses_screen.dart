@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/models/category.dart';
 import 'package:tutor_app/models/course.dart';
 import 'package:tutor_app/screens/Courses/course_manager.dart';
 import 'package:tutor_app/widgets/course_container.dart';
@@ -17,16 +18,40 @@ class CoursesScreen extends StatefulWidget {
 
 class _CoursesScreenState extends State<CoursesScreen> {
   List<Course> courseList = [];
+  List<String> categoryList = [];
+
+  void fetch({String topic = ''}) {
+    if (topic.isEmpty) {
+      CourseManager.fetchCourse().then((value) {
+        setState(() {
+          courseList = value;
+        });
+      });
+    } else {
+      //topic = topic.replaceAll(RegExp(''), '-');
+      print(topic);
+      CourseManager.fetchByTopic(topic).then((value) {
+        setState(() {
+          courseList = value;
+        });
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetch();
+    CourseManager.fetchCategories().then((value) {
+      categoryList = value;
+    });
+  }
 
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    CourseManager.fetchCourse().then((value) {
-      setState(() {
-        courseList = value;
-      });
-    });
   }
 
   @override
@@ -50,19 +75,14 @@ class _CoursesScreenState extends State<CoursesScreen> {
                     children: [
                       RoundedTabText(
                         nameTab: 'All',
+                        onTap: () => fetch(),
                       ),
-                      RoundedTabText(
-                        nameTab: 'English for kids',
-                      ),
-                      RoundedTabText(
-                        nameTab: 'IELTS',
-                      ),
-                      RoundedTabText(
-                        nameTab: 'TOEIC',
-                      ),
-                      RoundedTabText(
-                        nameTab: 'TOFEL',
-                      ),
+                      ...List.generate(
+                          categoryList.length,
+                          (index) => RoundedTabText(
+                                nameTab: categoryList[index],
+                                onTap: () => fetch(topic: categoryList[index]),
+                              )),
                     ],
                   ),
                 ),

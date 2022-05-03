@@ -198,7 +198,7 @@ class ScheduleInfo {
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     if (this.tutorInfo != null) {
-      data['tutorInfo'] = this.tutorInfo.toJson();
+      //data['tutorInfo'] = this.tutorInfo.toJson();
     }
     return data;
   }

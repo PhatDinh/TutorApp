@@ -38,7 +38,6 @@ class _TutorDetailContainerState extends State<TutorDetailContainer> {
   }
 
   List<Widget> listSpec(String spec) {
-    print(spec);
     List<String> temp = spec.split(',');
     return List.generate(temp.length, (index) {
       return RoundedTabText(nameTab: temp[index]);
@@ -88,7 +87,7 @@ class _TutorDetailContainerState extends State<TutorDetailContainer> {
                           padding: const EdgeInsets.only(top: 3),
                           child: Row(
                               mainAxisSize: MainAxisSize.min,
-                              children: calcStar(5)),
+                              children: calcStar(widget.tutor.avgRating)),
                         ),
                       ]),
                 ),

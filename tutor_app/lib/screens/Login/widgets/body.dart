@@ -8,6 +8,8 @@ import 'package:tutor_app/widgets/other_option_login.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 import 'package:tutor_app/widgets/rounded_password_field.dart';
 import './background.dart';
+import 'package:get/get.dart';
+import 'package:localization/localization.dart';
 //import '../../../widgets/text_field_container.dart';
 import '../../../widgets/rounded_input_field.dart';
 import '../../../widgets/rounded_password_field.dart';
@@ -43,7 +45,7 @@ class _BodyState extends State<Body> {
             ),
           ),
           RoundedInputField(
-            hintText: "Your Email",
+            hintText: 'Email'.i18n(),
             onChanged: (value) {
               setState(() {
                 email = value;
@@ -65,7 +67,7 @@ class _BodyState extends State<Body> {
                       MaterialPageRoute(builder: (context) => ForgetScreen()));
                 },
                 child: Text(
-                  "Forgot password ?",
+                  'Forgot'.i18n(),
                 )),
           ),
           RoundedButton(
@@ -77,7 +79,7 @@ class _BodyState extends State<Body> {
                 Navigator.pushNamed(context, '/home');
               }
             },
-            text: "LOGIN",
+            text: 'Login'.i18n(),
           ),
           OtherOptionLogin(),
           AlreadyHaveAnAccountCheck(

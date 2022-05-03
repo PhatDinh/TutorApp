@@ -1,36 +1,14 @@
-import 'dart:math';
-import 'package:lorem_ipsum/lorem_ipsum.dart';
-import 'package:tutor_app/models/course.dart';
-import 'package:tutor_app/models/review.dart';
+import 'user.dart';
+import 'review.dart';
 
 class Tutor {
-  double avg;
-  String level;
-  String email;
-  String google;
-  String facebook;
-  String apple;
-  String avatar;
-  String name;
-  String country;
-  String phone;
-  String language;
-  String birthday;
-  bool requestPassword;
-  bool isActivated;
-  bool isPhoneActivated;
-  Null requireNote;
-  int timezone;
-  bool phoneAuth;
-  bool isPhoneAuthActivated;
-  String createdAt;
-  String updatedAt;
-  String deletedAt;
-  List<Review> review;
   String id;
   String userId;
+  String name;
+  String avatar;
   String video;
   String bio;
+  String country;
   String education;
   String experience;
   String profession;
@@ -40,83 +18,53 @@ class Tutor {
   String languages;
   String specialties;
   String resume;
+  bool isActivated;
   bool isNative;
+  DateTime createdAt;
+  DateTime updatedAt;
+  User user;
+  bool isFavorite;
+  double avgRating;
+  List<Review> feedbacks;
   int price;
-  bool isOnline;
 
-  Tutor(
-      {this.level,
-      this.email,
-      this.avg,
-      this.google,
-      this.facebook,
-      this.apple,
-      this.avatar,
-      this.name,
-      this.country,
-      this.phone,
-      this.language,
-      this.birthday,
-      this.requestPassword,
-      this.isActivated,
-      this.isPhoneActivated,
-      this.requireNote,
-      this.timezone,
-      this.phoneAuth,
-      this.isPhoneAuthActivated,
-      this.createdAt,
-      this.updatedAt,
-      this.deletedAt,
-      this.review,
-      this.id,
-      this.userId,
-      this.video,
-      this.bio,
-      this.education,
-      this.experience,
-      this.profession,
-      this.accent,
-      this.targetStudent,
-      this.interests,
-      this.languages,
-      this.specialties,
-      this.resume,
-      this.isNative,
-      this.price,
-      this.isOnline});
+  Tutor({
+    this.id,
+    this.userId,
+    this.name,
+    this.avatar,
+    this.video,
+    this.bio,
+    this.country,
+    this.education,
+    this.experience,
+    this.profession,
+    this.accent,
+    this.targetStudent,
+    this.interests,
+    this.languages,
+    this.specialties,
+    this.resume,
+    this.isActivated,
+    this.isNative,
+    this.createdAt,
+    this.updatedAt,
+    this.user,
+    this.isFavorite,
+    this.avgRating = 0,
+    this.feedbacks,
+    this.price,
+  });
 
   Tutor.fromJson(Map<String, dynamic> json) {
-    level = json['level'];
-    email = json['email'];
-    google = json['google'];
-    facebook = json['facebook'];
-    apple = json['apple'];
-    avatar = json['avatar'];
-    name = json['name'];
-    country = json['country'];
-    phone = json['phone'];
-    language = json['language'];
-    birthday = json['birthday'];
-    requestPassword = json['requestPassword'];
-    isActivated = json['isActivated'];
-    isPhoneActivated = json['isPhoneActivated'];
-    requireNote = json['requireNote'];
-    timezone = json['timezone'];
-    phoneAuth = json['phoneAuth'];
-    isPhoneAuthActivated = json['isPhoneAuthActivated'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    deletedAt = json['deletedAt'];
-    if (json['review'] != null) {
-      review = <Review>[];
-      json['review'].forEach((v) {
-        review.add(new Review.fromJson(v));
-      });
-    }
+    user = json['User'];
     id = json['id'];
     userId = json['userId'];
+    name = json['name'];
+    avatar = json['avatar'];
     video = json['video'];
     bio = json['bio'];
+    country = json['country'];
     education = json['education'];
     experience = json['experience'];
     profession = json['profession'];
@@ -126,53 +74,64 @@ class Tutor {
     languages = json['languages'];
     specialties = json['specialties'];
     resume = json['resume'];
+    isActivated = json['isActivated'];
     isNative = json['isNative'];
+    createdAt = DateTime.tryParse(json['createdAt']);
+    updatedAt = DateTime.tryParse(json['updatedAt']);
+    isFavorite = json['isFavorite'];
+    if (json['feedbacks'] != null) {
+      feedbacks = <Review>[];
+      for (var f in json['feedbacks']) {
+        feedbacks.add(Review.fromJson(f));
+      }
+    }
+    // } else {
+    //   feedbacks = user.feedbacks;
+
+    if (!feedbacks.isEmpty) {
+      double rating = 0;
+      int count = 0;
+      for (var f in feedbacks) {
+        count += 1;
+        rating += f.rating;
+      }
+      avgRating = (rating) / count;
+    } else
+      avgRating = 0;
+
     price = json['price'];
-    isOnline = json['isOnline'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['level'] = this.level;
-    data['email'] = this.email;
-    data['google'] = this.google;
-    data['facebook'] = this.facebook;
-    data['apple'] = this.apple;
-    data['avatar'] = this.avatar;
-    data['name'] = this.name;
-    data['country'] = this.country;
-    data['phone'] = this.phone;
-    data['language'] = this.language;
-    data['birthday'] = this.birthday;
-    data['requestPassword'] = this.requestPassword;
-    data['isActivated'] = this.isActivated;
-    data['isPhoneActivated'] = this.isPhoneActivated;
-    data['requireNote'] = this.requireNote;
-    data['timezone'] = this.timezone;
-    data['phoneAuth'] = this.phoneAuth;
-    data['isPhoneAuthActivated'] = this.isPhoneAuthActivated;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['deletedAt'] = this.deletedAt;
-    if (this.review != null) {
-      data['review'] = this.review.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['userId'] = userId;
+    data['name'] = name;
+    data['avatar'] = avatar;
+    data['video'] = video;
+    data['bio'] = bio;
+    data['education'] = education;
+    data['experience'] = experience;
+    data['profession'] = profession;
+    data['accent'] = accent;
+    data['targetStudent'] = targetStudent;
+    data['interests'] = interests;
+    data['languages'] = languages;
+    data['specialties'] = specialties;
+    data['resume'] = resume;
+    data['isActivated'] = isActivated;
+    data['isNative'] = isNative;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    if (user != null) {
+      data['User'] = user.toJson();
     }
-    data['id'] = this.id;
-    data['userId'] = this.userId;
-    data['video'] = this.video;
-    data['bio'] = this.bio;
-    data['education'] = this.education;
-    data['experience'] = this.experience;
-    data['profession'] = this.profession;
-    data['accent'] = this.accent;
-    data['targetStudent'] = this.targetStudent;
-    data['interests'] = this.interests;
-    data['languages'] = this.languages;
-    data['specialties'] = this.specialties;
-    data['resume'] = this.resume;
-    data['isNative'] = this.isNative;
-    data['price'] = this.price;
-    data['isOnline'] = this.isOnline;
+    data['isFavorite'] = isFavorite;
+    data['avgRating'] = avgRating;
+    if (feedbacks != null) {
+      data['feedbacks'] = feedbacks.map((v) => v.toJson()).toList();
+    }
+    data['price'] = price;
     return data;
   }
 }

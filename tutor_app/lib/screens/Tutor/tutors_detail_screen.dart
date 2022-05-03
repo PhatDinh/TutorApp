@@ -22,14 +22,6 @@ class TutorsDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Tutor tutor = (ModalRoute.of(context).settings.arguments as Map)['tutor'];
-    print(tutor.name);
-    print(tutor.specialties);
-    print(tutor.languages);
-    print(tutor.education);
-    print(tutor.interests);
-    print(tutor.experience);
-    print(tutor.profession);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(tutor.name),
@@ -38,7 +30,9 @@ class TutorsDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const VideoContainer(),
+            VideoContainer(
+              linkVideo: tutor.video,
+            ),
             TutorDetailContainer(
               tutor: tutor,
             ),
@@ -149,8 +143,11 @@ class TutorsDetailScreen extends StatelessWidget {
             //Rating
             SectionBox(
               sectionName: 'Review',
-              //child:
-              //Container(width: double.infinity, child: CarouselTextBox()),
+              child: Container(
+                  width: double.infinity,
+                  child: CarouselTextBox(
+                    tutor: tutor,
+                  )),
             ),
           ],
         ),
