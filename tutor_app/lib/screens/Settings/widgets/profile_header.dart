@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tutor_app/models/user_dummy.dart';
 
 class ProfileHeader extends StatefulWidget {
   ProfileHeader({

@@ -34,8 +34,12 @@ class Review {
     content = json['content'];
     createdAt = DateTime.tryParse(json['createdAt'] ?? '');
     updatedAt = DateTime.tryParse(json['updatedAt'] ?? '');
-    //firstInfo = json['firstInfo'];
-    //secondInfo = json['secondInfo'];
+    //firstInfo = User.fromJson(json['firstInfo']);
+    //secondInfo = User.fromJson(json['secondInfo']);
+    // firstInfo =
+    //     json['firstInfo'] != null ? new User.fromJson(json['firstInfo']) : null;
+    firstInfo =
+        json['firstInfo'] != null ? new User.fromJson(json['firstInfo']) : null;
   }
 
   Map<String, dynamic> toJson() {

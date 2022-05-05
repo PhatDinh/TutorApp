@@ -1,16 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_app/models/schedule.dart';
+import 'package:tutor_app/models/schedule_details.dart';
 import 'package:tutor_app/models/tutor.dart';
 import 'package:tutor_app/screens/Tutor/widgets/carousel_text_box.dart';
 import 'package:tutor_app/screens/Tutor/widgets/introduce_text_box.dart';
 import 'package:tutor_app/screens/Tutor/widgets/section_box.dart';
 import 'package:tutor_app/screens/Tutor/widgets/tutor_detail_container.dart';
 import 'package:tutor_app/screens/Tutor/widgets/video_container.dart';
+import 'package:tutor_app/screens/Upcoming/schedule_manager.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
 import 'package:tutor_app/widgets/rounded_tab_text.dart';
 import 'package:tutor_app/widgets/tutor_container.dart';
 
-class TutorsDetailScreen extends StatelessWidget {
-  const TutorsDetailScreen({Key key}) : super(key: key);
+class TutorsDetailScreen extends StatefulWidget {
+  final Tutor tutor;
+  const TutorsDetailScreen({Key key, this.tutor}) : super(key: key);
+
+  @override
+  State<TutorsDetailScreen> createState() => _TutorsDetailScreenState();
+}
+
+class _TutorsDetailScreenState extends State<TutorsDetailScreen> {
+  List<Schedule> scheduleList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    ScheduleManager.fetchScheduleTutor(widget.tutor.userId).then((value) {
+      setState(() {
+        scheduleList = value;
+        print(scheduleList.length);
+      });
+    });
+  }
 
   List<Widget> listSpec(String spec) {
     List<String> temp = spec.split(',');
@@ -21,20 +43,20 @@ class TutorsDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Tutor tutor = (ModalRoute.of(context).settings.arguments as Map)['tutor'];
+    //Tutor tutor = (ModalRoute.of(context).settings.arguments as Map)['tutor'];
     return Scaffold(
       appBar: AppBar(
-        title: Text(tutor.name),
+        title: Text(widget.tutor.name),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             VideoContainer(
-              linkVideo: tutor.video,
+              linkVideo: widget.tutor.video,
             ),
             TutorDetailContainer(
-              tutor: tutor,
+              tutor: widget.tutor,
             ),
             Center(
               child: RoundedButton(
@@ -48,38 +70,26 @@ class TutorsDetailScreen extends StatelessWidget {
                           appBar: AppBar(
                             title: Text("Pick your date"),
                           ),
-                          body: SingleChildScrollView(
-                            child: Center(
-                              child: Column(
+                          body: Center(
+                            child: ListView(children: [
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  RoundedButton(
-                                    text: "2022-03-05",
-                                    press: () {},
-                                  ),
-                                  RoundedButton(
-                                    text: "2022-03-05",
-                                    press: () {},
-                                  ),
-                                  RoundedButton(
-                                    text: "2022-03-05",
-                                    press: () {},
-                                  ),
-                                  RoundedButton(
-                                    text: "2022-03-05",
-                                    press: () {},
-                                  ),
-                                  RoundedButton(
-                                    text: "2022-03-05",
-                                    press: () {},
-                                  ),
-                                  RoundedButton(
-                                    text: "2022-03-05",
-                                    press: () {},
-                                  ),
+                                  ...List.generate(scheduleList.length,
+                                      (index) {
+                                    final temp = scheduleList[index];
+                                    if (temp.scheduleDetails[0].isBooked)
+                                      return Container();
+                                    else
+                                      return RoundedButton(
+                                        text:
+                                            temp.scheduleDetails[0].startPeriod,
+                                        press: () {},
+                                      );
+                                  })
                                 ],
                               ),
-                            ),
+                            ]),
                           ),
                         );
                       });
@@ -95,7 +105,7 @@ class TutorsDetailScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: listSpec(tutor.languages),
+                    children: listSpec(widget.tutor.languages),
                   ),
                 )),
             //Education
@@ -103,7 +113,7 @@ class TutorsDetailScreen extends StatelessWidget {
               alignment: Alignment(-1, 0),
               child: SectionBox(
                 sectionName: "Education",
-                child: Text(tutor.education),
+                child: Text(widget.tutor.education),
               ),
             ),
             //Experience
@@ -111,7 +121,7 @@ class TutorsDetailScreen extends StatelessWidget {
               alignment: Alignment(-1, 0),
               child: SectionBox(
                 sectionName: "Experience",
-                child: Text(tutor.experience),
+                child: Text(widget.tutor.experience),
               ),
             ),
             //Interest
@@ -119,7 +129,7 @@ class TutorsDetailScreen extends StatelessWidget {
               alignment: Alignment(-1, 0),
               child: SectionBox(
                 sectionName: "Interest",
-                child: Text(tutor.interests),
+                child: Text(widget.tutor.interests),
               ),
             ),
             //Profession
@@ -127,7 +137,7 @@ class TutorsDetailScreen extends StatelessWidget {
               alignment: Alignment(-1, 0),
               child: SectionBox(
                 sectionName: "Profession",
-                child: Text(tutor.profession),
+                child: Text(widget.tutor.profession),
               ),
             ),
             //Specialities
@@ -136,7 +146,7 @@ class TutorsDetailScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: listSpec(tutor.specialties),
+                    children: listSpec(widget.tutor.specialties),
                   ),
                 )),
 
@@ -146,7 +156,7 @@ class TutorsDetailScreen extends StatelessWidget {
               child: Container(
                   width: double.infinity,
                   child: CarouselTextBox(
-                    tutor: tutor,
+                    tutor: widget.tutor,
                   )),
             ),
           ],

@@ -4,9 +4,12 @@ class TextBox extends StatelessWidget {
   final String boxName;
   final double boxRating;
   final String boxDetail;
+  final String avatar;
+
   const TextBox({
     Key key,
     this.boxName,
+    this.avatar,
     this.boxRating,
     this.boxDetail,
   }) : super(key: key);
@@ -48,6 +51,15 @@ class TextBox extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                SizedBox(
+                  height: 40,
+                  width: 30,
+                  child: ClipOval(
+                    child: Image.network(
+                      avatar,
+                    ),
+                  ),
+                ),
                 Text(
                   boxName,
                   maxLines: 1,

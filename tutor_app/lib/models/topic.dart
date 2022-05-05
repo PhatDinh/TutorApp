@@ -30,6 +30,7 @@ class Topics {
     orderCourse = json['orderCourse'];
     name = json['name'];
     nameFile = json['nameFile'];
+    nameFile = nameFile.replaceAll(' ', '');
     description = json['description'];
     videoUrl = json['videoUrl'];
     createdAt = json['createdAt'];
@@ -48,24 +49,5 @@ class Topics {
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     return data;
-  }
-}
-
-class TopicsDummy {
-  static List<Topics> offData = generateData(10);
-  static Topics generate() {
-    //inal rd = new Random();
-    return Topics(
-      name: loremIpsum(paragraphs: 1, words: 5),
-      description: loremIpsum(paragraphs: 1, words: 200),
-    );
-  }
-
-  static List<Topics> generateData(int num) {
-    List<Topics> temp;
-    for (int i = 0; i < num; i++) {
-      temp.add(generate());
-    }
-    return temp;
   }
 }

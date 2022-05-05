@@ -23,7 +23,7 @@ class TutorManager {
     return temp;
   }
 
-  static Future<List<Tutor>> fetchfavoriteTutor() async {
+  static Future<List<FavouriteTutor>> fetchfavouriteTutor() async {
     final prefs = await SharedPreferences.getInstance();
     final res = await http.get(
       Uri.parse('https://sandbox.api.lettutor.com/tutor/more?perPage=9&page=1'),
@@ -32,10 +32,10 @@ class TutorManager {
         'Authorization': 'Bearer ' + prefs.getString('token'),
       },
     );
-    List<Tutor> temp = [];
+    List<FavouriteTutor> temp = [];
     final resJson = jsonDecode(res.body)['favoriteTutor'];
     for (var t in resJson) {
-      Tutor tutor = Tutor.fromJson(t);
+      FavouriteTutor tutor = FavouriteTutor.fromJson(t);
       temp.add(tutor);
     }
     return temp;
@@ -65,7 +65,7 @@ class TutorManager {
 
   static Tutor findTutorByList(List<Tutor> tutorList, String tutorID) {
     for (var t in tutorList) {
-      if (t.id == tutorID) return t;
+      if (t.userId == tutorID) return t;
     }
     return null;
   }

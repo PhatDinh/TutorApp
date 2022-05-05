@@ -43,7 +43,9 @@ class SettingScreen extends StatelessWidget {
           RoundedSettingButton(
             icon: Icons.person,
             text: "Advanced Setting",
-            press: () {},
+            press: () {
+              Navigator.pushNamed(context, '/advanced-setting');
+            },
           ),
           SizedBox(
             height: 10,

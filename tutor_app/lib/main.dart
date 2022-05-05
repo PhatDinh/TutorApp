@@ -1,15 +1,24 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import 'package:tutor_app/libary.dart';
+import 'package:tutor_app/models/setting.dart';
 import 'package:tutor_app/screens/Courses/course_detail_screen.dart';
 import 'package:tutor_app/screens/Home/home_screen.dart';
 import 'package:tutor_app/screens/Login/login_screen.dart';
+import 'package:tutor_app/screens/Settings/advanced_setting_screen.dart';
 import 'package:tutor_app/screens/Tutor/tutors_detail_screen.dart';
 import 'package:localization/localization.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => Setting()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,37 +29,42 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     LocalJsonLocalization.delegate.directories = ['lib/i18n'];
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: Style.lightMode,
-      darkTheme: Style.darkMode,
-      themeMode: ThemeMode.dark,
-      title: 'Flutter Demo',
-      home: LoginScreen(),
-      supportedLocales: [
-        Locale('vi', 'VN'),
-        Locale('en', 'US'),
-      ],
-      localizationsDelegates: {
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        LocalJsonLocalization.delegate,
-      },
-      localeResolutionCallback: ((locale, supportedLocales) {
-        for (var supportedLocaleLanguage in supportedLocales) {
-          if (supportedLocaleLanguage.languageCode == locale.languageCode &&
-              supportedLocaleLanguage.countryCode == locale.countryCode) {
-            return supportedLocaleLanguage;
-          }
-        }
-        return supportedLocales.first;
+    return Consumer<Setting>(
+      builder: ((context, value, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: Style.lightMode,
+          darkTheme: Style.darkMode,
+          themeMode: value.getColorMode() ? ThemeMode.dark : ThemeMode.light,
+          title: 'Flutter Demo',
+          home: LoginScreen(),
+          supportedLocales: [
+            Locale('vi', 'VN'),
+            Locale('en', 'US'),
+          ],
+          localizationsDelegates: {
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            LocalJsonLocalization.delegate,
+          },
+          localeResolutionCallback: ((locale, supportedLocales) {
+            for (var supportedLocaleLanguage in supportedLocales) {
+              if (supportedLocaleLanguage.languageCode == locale.languageCode &&
+                  supportedLocaleLanguage.countryCode == locale.countryCode) {
+                return supportedLocaleLanguage;
+              }
+            }
+            return supportedLocales.first;
+          }),
+          routes: {
+            '/tutor-detail': (context) => TutorsDetailScreen(),
+            '/course-detail': (context) => CourseDetailScreen(),
+            '/home': (context) => HomeScreen(),
+            '/advanced-setting': (context) => AdvancedSetting(),
+          },
+        );
       }),
-      routes: {
-        '/tutor-detail': (context) => TutorsDetailScreen(),
-        '/course-detail': (context) => CourseDetailScreen(),
-        '/home': (context) => HomeScreen(),
-      },
     );
   }
 }

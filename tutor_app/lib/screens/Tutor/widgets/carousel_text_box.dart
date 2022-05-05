@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:tutor_app/models/review.dart';
 import 'package:tutor_app/models/tutor.dart';
-import 'package:tutor_app/screens/Tutor/tutor_manager.dart';
 import 'package:tutor_app/screens/Tutor/widgets/text_box.dart';
 
 class CarouselTextBox extends StatefulWidget {
@@ -25,9 +24,10 @@ class _CarouselTextBoxState extends State<CarouselTextBox> {
           ...List.generate(reviewList.length, (index) {
             Review temp = reviewList[index];
             return TextBox(
+              avatar: temp.firstInfo.avatar,
               boxDetail: temp.content,
               boxRating: temp.rating.toDouble(),
-              boxName: temp.id,
+              boxName: temp.firstInfo.name,
             );
           })
         ],

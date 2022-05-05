@@ -18,14 +18,33 @@ class TutorsScreen extends StatefulWidget {
 
 class _TutorsScreenState extends State<TutorsScreen> {
   List<Tutor> tutorList = [];
-  List<Tutor> favoriteList = [];
+  List<FavouriteTutor> favouriteList = [];
   List<String> categoryList = [];
+  List<Tutor> allTutorList = [];
+
+  void _runFilter(String enteredKeyword) {
+    List<Tutor> results = [];
+    if (enteredKeyword.isEmpty) {
+      setState(() {
+        tutorList = allTutorList;
+      });
+    } else {
+      results = tutorList
+          .where((user) =>
+              user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+      setState(() {
+        tutorList = results;
+      });
+    }
+  }
 
   void fetch({String topic = ''}) {
     if (topic.isEmpty) {
       TutorManager.fetchTutor().then((value) {
         setState(() {
           tutorList = value;
+          allTutorList = tutorList;
         });
       });
     } else {
@@ -40,23 +59,27 @@ class _TutorsScreenState extends State<TutorsScreen> {
   }
 
   void fetchFavourite() {
-    TutorManager.fetchfavoriteTutor().then((value) {
+    TutorManager.fetchfavouriteTutor().then((value) {
       setState(() {
-        favoriteList = value;
+        favouriteList = value;
       });
     });
+  }
+
+  void showFavourtie() {
     List<Tutor> temp = [];
-    for (var t in favoriteList) {
-      Tutor tutor = TutorManager.findTutorByList(tutorList, t.id);
+    for (var t in favouriteList) {
+      Tutor tutor = TutorManager.findTutorByList(tutorList, t.secondId);
       if (tutor != null) temp.add(tutor);
     }
-    favoriteList = temp;
+    setState(() {
+      tutorList = temp;
+    });
   }
 
   bool checkFavorite(String tutorID) {
-    for (var i in favoriteList) {
-      print(i.name);
-      if (i.id == tutorID) {
+    for (var i in favouriteList) {
+      if (i.secondId == tutorID) {
         return true;
       }
     }
@@ -90,7 +113,7 @@ class _TutorsScreenState extends State<TutorsScreen> {
           child: Column(
             children: [
               RoundedSearchField(
-                onChanged: (value) {},
+                onChanged: (value) => _runFilter(value),
                 hintIcon: Icons.search,
                 hintText: "Search Tutors",
               ),
@@ -106,12 +129,7 @@ class _TutorsScreenState extends State<TutorsScreen> {
                       ),
                       RoundedTabText(
                         nameTab: 'Favorite',
-                        onTap: () =>
-                            TutorManager.fetchfavoriteTutor().then((value) {
-                          setState(() {
-                            tutorList = value;
-                          });
-                        }),
+                        onTap: () => showFavourtie(),
                       ),
                       ...List.generate(
                           categoryList.length,
@@ -124,8 +142,7 @@ class _TutorsScreenState extends State<TutorsScreen> {
                 ),
               ),
               ...List.generate(tutorList.length, (index) {
-                final isFavorite = checkFavorite(tutorList[index].id);
-                print(isFavorite);
+                final isFavorite = checkFavorite(tutorList[index].userId);
                 return TutorContainer(
                   tutor: tutorList[index],
                   isFavorite: isFavorite,

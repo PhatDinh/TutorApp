@@ -1,61 +1,75 @@
+import 'package:tutor_app/models/tutor.dart';
+
 import 'booking_info.dart';
 
-class ScheduleDetails {
+class ScheduleDetail {
   int startPeriodTimestamp;
   int endPeriodTimestamp;
   String id;
   String scheduleId;
+  String tutorId;
+  Tutor tutorInfo;
   String startPeriod;
   String endPeriod;
-  String createdAt;
-  String updatedAt;
+  DateTime createdAt;
+  DateTime updatedAt;
   List<BookingInfo> bookingInfo;
   bool isBooked;
 
-  ScheduleDetails(
-      {this.startPeriodTimestamp,
-      this.endPeriodTimestamp,
-      this.id,
-      this.scheduleId,
-      this.startPeriod,
-      this.endPeriod,
-      this.createdAt,
-      this.updatedAt,
-      this.bookingInfo,
-      this.isBooked});
+  ScheduleDetail({
+    this.startPeriodTimestamp,
+    this.endPeriodTimestamp,
+    this.id,
+    this.scheduleId,
+    this.startPeriod,
+    this.endPeriod,
+    this.createdAt,
+    this.updatedAt,
+    this.bookingInfo,
+    this.isBooked,
+  });
 
-  ScheduleDetails.fromJson(Map<String, dynamic> json) {
+  ScheduleDetail.fromJson(Map<String, dynamic> json) {
     startPeriodTimestamp = json['startPeriodTimestamp'];
     endPeriodTimestamp = json['endPeriodTimestamp'];
     id = json['id'];
     scheduleId = json['scheduleId'];
     startPeriod = json['startPeriod'];
     endPeriod = json['endPeriod'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    if (json['bookingInfo'] = null) {
+    createdAt = DateTime.tryParse(json['createdAt'] ?? '');
+    updatedAt = DateTime.tryParse(json['updatedAt'] ?? '');
+    if (json['bookingInfo'] != null) {
       bookingInfo = <BookingInfo>[];
       json['bookingInfo'].forEach((v) {
-        bookingInfo.add(new BookingInfo.fromJson(v));
+        bookingInfo.add(BookingInfo.fromJson(v));
       });
     }
-    isBooked = json['isBooked'];
+    isBooked = json['isBooked'] == null ? false : json['isBooked'];
+    if (json['scheduleInfo'] != null) {
+      tutorId = json['scheduleInfo']['tutorId'];
+      tutorInfo = Tutor.fromJson(json['scheduleInfo']['tutorInfo']);
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['startPeriodTimestamp'] = this.startPeriodTimestamp;
-    data['endPeriodTimestamp'] = this.endPeriodTimestamp;
-    data['id'] = this.id;
-    data['scheduleId'] = this.scheduleId;
-    data['startPeriod'] = this.startPeriod;
-    data['endPeriod'] = this.endPeriod;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    if (this.bookingInfo = null) {
-      data['bookingInfo'] = this.bookingInfo.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['startPeriodTimestamp'] = startPeriodTimestamp;
+    data['endPeriodTimestamp'] = endPeriodTimestamp;
+    data['id'] = id;
+    data['scheduleId'] = scheduleId;
+    data['startPeriod'] = startPeriod;
+    data['endPeriod'] = endPeriod;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    if (bookingInfo != null) {
+      data['bookingInfo'] = bookingInfo.map((v) => v.toJson()).toList();
     }
-    data['isBooked'] = this.isBooked;
+    data['isBooked'] = isBooked;
     return data;
+  }
+
+  @override
+  String toString() {
+    return toJson().toString();
   }
 }

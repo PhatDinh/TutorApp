@@ -85,7 +85,8 @@ class User {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     deletedAt = json['deletedAt'];
-    tutorInfo = Tutor.fromJson(json['tutorInfo']);
+    tutorInfo =
+        json['tutorInfo'] != null ? Tutor.fromJson(json['tutorInfo']) : null;
     if (json['roles'] != null) {
       roles = <String>[];
       json['roles'].forEach((v) {

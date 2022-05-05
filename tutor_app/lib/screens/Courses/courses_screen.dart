@@ -19,12 +19,14 @@ class CoursesScreen extends StatefulWidget {
 class _CoursesScreenState extends State<CoursesScreen> {
   List<Course> courseList = [];
   List<String> categoryList = [];
+  List<Course> allCourseList = [];
 
   void fetch({String topic = ''}) {
     if (topic.isEmpty) {
       CourseManager.fetchCourse().then((value) {
         setState(() {
           courseList = value;
+          allCourseList = courseList;
         });
       });
     } else {
@@ -36,6 +38,26 @@ class _CoursesScreenState extends State<CoursesScreen> {
         });
       });
     }
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List<Course> results = [];
+    print(enteredKeyword);
+    if (enteredKeyword.isEmpty) {
+      setState(() {
+        courseList = allCourseList;
+      });
+    } else {
+      results = courseList
+          .where((user) =>
+              user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+      setState(() {
+        courseList = results;
+      });
+      // we use the toLowerCase() method to make it case-insensitive
+    }
+    // Refresh the UI
   }
 
   @override
@@ -63,7 +85,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
           child: Column(
             children: [
               RoundedSearchField(
-                onChanged: (value) {},
+                onChanged: (value) => _runFilter(value),
                 hintIcon: Icons.search,
                 hintText: "Search Courses",
               ),

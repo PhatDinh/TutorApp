@@ -51,8 +51,14 @@ class _TutorContainerState extends State<TutorContainer> {
       padding: const EdgeInsets.only(bottom: 10),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/tutor-detail',
-              arguments: {'tutor': widget.tutor});
+          // Navigator.pushNamed(context, '/tutor-detail',
+          //     arguments: {'tutor': widget.tutor});
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => TutorsDetailScreen(
+                        tutor: widget.tutor,
+                      )));
         },
         child: Card(
           shape: const RoundedRectangleBorder(

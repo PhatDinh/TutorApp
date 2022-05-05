@@ -3,6 +3,7 @@ import 'package:tutor_app/models/course.dart';
 import 'package:tutor_app/screens/Courses/widgets/overview_container.dart';
 import 'package:tutor_app/screens/Tutor/widgets/section_box.dart';
 import 'package:tutor_app/widgets/rounded_button.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class CourseDetailScreen extends StatelessWidget {
   const CourseDetailScreen({Key key}) : super(key: key);
@@ -59,9 +60,24 @@ class CourseDetailScreen extends StatelessWidget {
                             return Padding(
                               padding:
                                   const EdgeInsets.only(top: 8.0, bottom: 8),
-                              child: Text(index.toString() +
-                                  ' ' +
-                                  course.topics[index].name),
+                              child: InkWell(
+                                onTap: () {
+                                  print(course.topics[index].nameFile);
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                    return Scaffold(
+                                      appBar: AppBar(
+                                          title:
+                                              Text(course.topics[index].name)),
+                                      body: SfPdfViewer.network(
+                                          course.topics[index].nameFile),
+                                    );
+                                  }));
+                                },
+                                child: Text(index.toString() +
+                                    ' ' +
+                                    course.topics[index].name),
+                              ),
                             );
                           })
                         ],

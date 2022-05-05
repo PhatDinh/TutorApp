@@ -36,13 +36,12 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
             ...List.generate(upcomingList.length, (index) {
               Schedule temp = upcomingList[index];
               final start =
-                  DateTime.fromMillisecondsSinceEpoch(temp.createdAtTimeStamp);
+                  DateTime.fromMillisecondsSinceEpoch(temp.startTimestamp);
               final end =
-                  DateTime.fromMillisecondsSinceEpoch(temp.updatedAtTimeStamp);
+                  DateTime.fromMillisecondsSinceEpoch(temp.endTimestamp);
               return UpcomingLeasson(
-                tutorAvatar:
-                    temp.scheduleDetailInfo.scheduleInfo.tutorInfo.avatar,
-                tutorName: temp.scheduleDetailInfo.scheduleInfo.tutorInfo.name,
+                tutorAvatar: temp.scheduleDetailInfo.tutorInfo.avatar,
+                tutorName: temp.scheduleDetailInfo.tutorInfo.name,
                 date: DateFormat.yMd().format(start).toString(),
                 time: DateFormat.Hms().format(start).toString() +
                     ' - ' +

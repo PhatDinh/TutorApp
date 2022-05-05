@@ -27,6 +27,7 @@ class RoundedSearchField extends StatelessWidget {
             borderRadius: BorderRadius.circular(10)),
         child: TextField(
           textAlign: TextAlign.left,
+          onChanged: onChanged,
           decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hintText,

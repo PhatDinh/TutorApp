@@ -84,9 +84,9 @@ class Tutor {
       for (var f in json['feedbacks']) {
         feedbacks.add(Review.fromJson(f));
       }
+    } else {
+      feedbacks = user.feedbacks;
     }
-    // } else {
-    //   feedbacks = user.feedbacks;
 
     if (!feedbacks.isEmpty) {
       double rating = 0;
@@ -132,6 +132,47 @@ class Tutor {
       data['feedbacks'] = feedbacks.map((v) => v.toJson()).toList();
     }
     data['price'] = price;
+    return data;
+  }
+}
+
+class FavouriteTutor {
+  String id;
+  String firstId;
+  String secondId;
+  String createdAt;
+  String updatedAt;
+  User secondInfo;
+
+  FavouriteTutor(
+      {this.id,
+      this.firstId,
+      this.secondId,
+      this.createdAt,
+      this.updatedAt,
+      this.secondInfo});
+
+  FavouriteTutor.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    firstId = json['firstId'];
+    secondId = json['secondId'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+    secondInfo = json['secondInfo'] != null
+        ? new User.fromJson(json['secondInfo'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['firstId'] = this.firstId;
+    data['secondId'] = this.secondId;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    if (this.secondInfo != null) {
+      data['secondInfo'] = this.secondInfo.toJson();
+    }
     return data;
   }
 }
