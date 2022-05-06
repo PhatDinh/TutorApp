@@ -17,6 +17,40 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   List<Tutor> tutorList = [];
+  List<FavouriteTutor> favouriteList = [];
+
+  void fetchFavourite() {
+    TutorManager.fetchfavouriteTutor().then((value) {
+      setState(() {
+        favouriteList = value;
+      });
+    });
+  }
+
+  void fetch() {
+    TutorManager.fetchTutor().then((value) {
+      setState(() {
+        tutorList = value;
+      });
+    });
+  }
+
+  bool checkFavorite(String tutorID) {
+    for (var i in favouriteList) {
+      print("1." + i.secondId);
+      if (i.secondId == tutorID) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetch();
+    fetchFavourite();
+  }
 
   @override
   void didChangeDependencies() {
@@ -54,7 +88,11 @@ class _BodyState extends State<Body> {
           ),
         ),
         ...List.generate(tutorList.length, (index) {
-          return TutorContainer(tutor: tutorList[index]);
+          final isFavorite = checkFavorite(tutorList[index].userId);
+          return TutorContainer(
+            tutor: tutorList[index],
+            isFavorite: isFavorite,
+          );
         })
       ]),
     );

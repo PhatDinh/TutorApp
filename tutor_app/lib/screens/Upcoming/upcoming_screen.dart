@@ -40,8 +40,8 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
               final end =
                   DateTime.fromMillisecondsSinceEpoch(temp.endTimestamp);
               return UpcomingLeasson(
-                tutorAvatar: temp.scheduleDetailInfo.tutorInfo.avatar,
-                tutorName: temp.scheduleDetailInfo.tutorInfo.name,
+                tutorAvatar: temp.scheduleDetails[0].tutorInfo.avatar,
+                tutorName: temp.scheduleDetails[0].tutorInfo.name,
                 date: DateFormat.yMd().format(start).toString(),
                 time: DateFormat.Hms().format(start).toString() +
                     ' - ' +

@@ -69,7 +69,7 @@ class _TutorsScreenState extends State<TutorsScreen> {
   void showFavourtie() {
     List<Tutor> temp = [];
     for (var t in favouriteList) {
-      Tutor tutor = TutorManager.findTutorByList(tutorList, t.secondId);
+      Tutor tutor = TutorManager.findTutorByList(allTutorList, t.secondId);
       if (tutor != null) temp.add(tutor);
     }
     setState(() {
@@ -79,6 +79,7 @@ class _TutorsScreenState extends State<TutorsScreen> {
 
   bool checkFavorite(String tutorID) {
     for (var i in favouriteList) {
+      print("1." + i.secondId);
       if (i.secondId == tutorID) {
         return true;
       }
@@ -144,9 +145,12 @@ class _TutorsScreenState extends State<TutorsScreen> {
               ...List.generate(tutorList.length, (index) {
                 final isFavorite = checkFavorite(tutorList[index].userId);
                 return TutorContainer(
-                  tutor: tutorList[index],
-                  isFavorite: isFavorite,
-                );
+                    tutor: tutorList[index],
+                    isFavorite: isFavorite,
+                    onPressed: () {
+                      TutorManager.favoriteTutor(tutorList[index].userId);
+                      setState(() {});
+                    });
               })
             ],
           )),

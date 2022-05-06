@@ -74,7 +74,7 @@ class User {
     phone = json['phone'];
     language = json['language'];
     birthday = json['birthday'];
-    avgRating = json['avgRating'];
+    avgRating = json['avgRating'] != null ? json['avgRating'] : null;
     requestPassword = json['requestPassword'];
     isActivated = json['isActivated'];
     isPhoneActivated = json['isPhoneActivated'];

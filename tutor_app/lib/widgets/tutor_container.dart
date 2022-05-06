@@ -6,8 +6,10 @@ import 'rounded_tab_text.dart';
 
 class TutorContainer extends StatefulWidget {
   final bool isFavorite;
+  final Function onPressed;
   final Tutor tutor;
-  const TutorContainer({Key key, this.tutor, this.isFavorite = false})
+  const TutorContainer(
+      {Key key, this.tutor, this.isFavorite = false, this.onPressed = null})
       : super(key: key);
 
   @override
@@ -117,12 +119,7 @@ class _TutorContainerState extends State<TutorContainer> {
                   ),
                   //const Spacer(),
                   TextButton(
-                      onPressed: () {
-                        setState(() {
-                          TutorManager.favoriteTutor(widget.tutor.id);
-                          setState(() {});
-                        });
-                      },
+                      onPressed: widget.onPressed,
                       child: widget.isFavorite
                           ? const Icon(Icons.favorite)
                           : const Icon(Icons.favorite_border)),

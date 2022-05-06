@@ -20,8 +20,8 @@ class ScheduleManager {
     final resJson = jsonDecode(res.body)['data']['rows'];
     for (var t in resJson) {
       final schedule = Schedule.fromJson(t);
-      if (schedule.userId == prefs.getString('id'))
-        temp.add(Schedule.fromJson(t));
+      // if (schedule.userId == prefs.getString('id'))
+      temp.add(Schedule.fromJson(t));
     }
     return temp;
   }
@@ -42,5 +42,19 @@ class ScheduleManager {
       temp.add(schedule);
     }
     return temp;
+  }
+
+  static void book(String scheduleDetailID) async {
+    final prefs = await SharedPreferences.getInstance();
+    final res =
+        await http.post(Uri.parse('https://sandbox.api.lettutor.com/booking'),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + prefs.getString('token'),
+            },
+            body: jsonEncode({
+              "scheduleDetailIds": [scheduleDetailID],
+              "note": "",
+            }));
   }
 }

@@ -57,7 +57,7 @@ class Tutor {
   });
 
   Tutor.fromJson(Map<String, dynamic> json) {
-    user = json['User'];
+    user = json['User'] != null ? User.fromJson(json['User']) : null;
     id = json['id'];
     userId = json['userId'];
     name = json['name'];
@@ -78,15 +78,16 @@ class Tutor {
     isNative = json['isNative'];
     createdAt = DateTime.tryParse(json['createdAt']);
     updatedAt = DateTime.tryParse(json['updatedAt']);
-    isFavorite = json['isFavorite'];
+    isFavorite = json['isFavorite'] != null ? json['isFavorite'] : null;
     if (json['feedbacks'] != null) {
       feedbacks = <Review>[];
       for (var f in json['feedbacks']) {
         feedbacks.add(Review.fromJson(f));
       }
-    } else {
-      feedbacks = user.feedbacks;
     }
+    //else {
+    //   feedbacks = user.feedbacks;
+    // }
 
     if (!feedbacks.isEmpty) {
       double rating = 0;
@@ -158,9 +159,9 @@ class FavouriteTutor {
     secondId = json['secondId'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    secondInfo = json['secondInfo'] != null
-        ? new User.fromJson(json['secondInfo'])
-        : null;
+    // secondInfo = json['secondInfo'] != null
+    //     ? new User.fromJson(json['secondInfo'])
+    //     : null;
   }
 
   Map<String, dynamic> toJson() {

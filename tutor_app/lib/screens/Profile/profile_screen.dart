@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_app/models/user.dart';
-import 'package:tutor_app/models/user_dummy.dart';
 import 'package:tutor_app/screens/Profile/profile_manager.dart';
 import 'package:tutor_app/screens/Profile/widgets/date_button.dart';
 import 'package:tutor_app/screens/Profile/widgets/edit_drop_button.dart';
@@ -59,13 +58,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 EditDropButton(
                   boxName: 'Country',
                   items: ['Easy', 'Med', 'Hard'],
-                  hintText: UserDummy.country,
+                  //hintText: UserDummy.country,
                   startValue: null,
                 ),
                 EditDropButton(
                   boxName: 'Level',
                   items: ['Easy', 'Med', 'Hard'],
-                  hintText: UserDummy.level,
+                  //hintText: UserDummy.level,
                   startValue: null,
                 ),
                 RoundedButton(

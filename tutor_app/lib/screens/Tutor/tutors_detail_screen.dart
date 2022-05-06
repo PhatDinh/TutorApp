@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tutor_app/models/schedule.dart';
 import 'package:tutor_app/models/schedule_details.dart';
 import 'package:tutor_app/models/tutor.dart';
@@ -82,9 +83,17 @@ class _TutorsDetailScreenState extends State<TutorsDetailScreen> {
                                       return Container();
                                     else
                                       return RoundedButton(
-                                        text:
-                                            temp.scheduleDetails[0].startPeriod,
-                                        press: () {},
+                                        text: DateFormat.yMd().format(temp
+                                                .scheduleDetails[0].createdAt) +
+                                            ':' +
+                                            temp.scheduleDetails[0]
+                                                .startPeriod +
+                                            '-' +
+                                            temp.scheduleDetails[0].endPeriod,
+                                        press: () {
+                                          ScheduleManager.book(
+                                              temp.scheduleDetailId);
+                                        },
                                       );
                                   })
                                 ],
