@@ -84,7 +84,8 @@ class Tutor {
       for (var f in json['feedbacks']) {
         feedbacks.add(Review.fromJson(f));
       }
-    }
+    } else
+      feedbacks = [];
     //else {
     //   feedbacks = user.feedbacks;
     // }

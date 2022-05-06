@@ -149,7 +149,9 @@ class _TutorsScreenState extends State<TutorsScreen> {
                     isFavorite: isFavorite,
                     onPressed: () {
                       TutorManager.favoriteTutor(tutorList[index].userId);
-                      setState(() {});
+                      setState(() {
+                        fetchFavourite();
+                      });
                     });
               })
             ],
